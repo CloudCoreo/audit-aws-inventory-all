@@ -144,7 +144,7 @@ end
   inv_hash[:methods].each_pair { |method, id|
     next if id.eql?("NA")
     m = method.to_s
-    rule_name = "#{service.downcase}-inventory-#{m.downcase.gsub('list_', '').gsub('describe_', '').gsub('get_', '').gsub('-', '_')}"
+    rule_name = "#{service.downcase}-inventory-#{m.downcase.gsub('list_', '').gsub('describe_', '').gsub('get_', '').gsub('_', '-')}"
     service_rules.push(rule_name)
     writeLine <<-EOH
 coreo_aws_rule "#{rule_name}" do
