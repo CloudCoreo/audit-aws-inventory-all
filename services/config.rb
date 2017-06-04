@@ -1530,27 +1530,28 @@ coreo_aws_rule "cloudtrail-inventory-trails" do
   raise_when [//]
   id_map ["object.trail_list.trail_arn"]
 end
-coreo_aws_rule "cloudtrail-inventory-public_keys" do
-  service :CloudTrail
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "CloudTrail Inventory"
-  description "This rule performs an inventory on the CloudTrail service using the list_public_keys function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["list_public_keys"]
-  audit_objects ["object.public_key_list.value"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.public_key_list.value"]
-end
-  
+# coreo_aws_rule "cloudtrail-inventory-public_keys" do
+#   service :CloudTrail
+#   action :define
+#   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
+#   include_violations_in_count false
+#   display_name "CloudTrail Inventory"
+#   description "This rule performs an inventory on the CloudTrail service using the list_public_keys function"
+#   category "Inventory"
+#   suggested_action "None."
+#   level "Informational"
+#   objectives ["list_public_keys"]
+#   audit_objects ["object.public_key_list.value"]
+#   operators ["=~"]
+#   raise_when [//]
+#   id_map ["object.public_key_list.value"]
+# end
+#
 coreo_aws_rule_runner "cloudtrail-inventory-runner" do
   action :run
   service :CloudTrail
-  rules ["cloudtrail-inventory-trails", "cloudtrail-inventory-public_keys"]
+  # rules ["cloudtrail-inventory-trails", "cloudtrail-inventory-public_keys"]
+  rules ["cloudtrail-inventory-trails"]
 end
 coreo_aws_rule "cloudwatch-inventory-alarms" do
   service :CloudWatch
