@@ -166,18 +166,18 @@ end
     EOH
   }
 
-  addVariableToYaml("AUDIT_AWS_#{service.upcase}_ALERT_LIST",
-                    "Which rules would you like to run? Possible values are #{service_rules.join(',')}",
-                    false,
-                    "array",
-                    service_rules)
+  # addVariableToYaml("AUDIT_AWS_#{service.upcase}_ALERT_LIST",
+  #                   "Which rules would you like to run? Possible values are #{service_rules.join(',')}",
+  #                   false,
+  #                   "array",
+  #                   service_rules)
 
   writeLine <<-EOH
   
 coreo_aws_rule_runner "#{service.downcase}-inventory-runner" do
   action :run
   service :#{service}
-  rules ${AUDIT_AWS_#{service.upcase}_ALERT_LIST}
+  rules #{service_rules}
 end
   EOH
 }
