@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
-@specify_services = ["Route53"]
+# @specify_services = ["Route53"]
 
 @yaml_doc = { 'variables' => {} }
 @modified_methods = {
@@ -13,7 +13,7 @@ require 'yaml'
 @engine_bug_exclusions = {
   :EC2 => ["describe_images", "describe_snapshots"],
   :CloudTrail => ["list_public_keys"],
-  :Route53 => ["get_checker_ip_ranges"]
+  :Route53 => ["get_checker_ip_ranges", "list_hosted_zones", "list_geo_locations"]
 }
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
@@ -138,7 +138,9 @@ end
 
 Aws.partition('aws').services.each do |s|
   writeLine "# #{s.name}"
-  next unless @specify_services.size > 0 && @specify_services.include?(s.name)
+  if @specify_services
+    next unless @specify_services.size > 0 && @specify_services.include?(s.name)
+  end
   begin
     aws_client = eval("Aws::#{s.name}::Client.new")
   rescue Exception => e
@@ -203,7 +205,7 @@ coreo_aws_rule "#{rule_name}" do
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
-  display_name "#{sClass} #{rule_detail.capitalize} Inventory"
+  display_name "#{sClass} #{rule_detail.split('-').map(&:capitalize).join(' ')} Inventory"
   description "This rule performs an inventory on the #{sClass} service using the #{m} function"
   category "Inventory"
   suggested_action "None."
