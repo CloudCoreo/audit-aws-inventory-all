@@ -4,17 +4,18 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
-# @specify_services = ["RDS", "SSM"]
+# @specify_services = ["Route53", "SSM"]
 
-@yaml_doc = { 'variables' => {} }
 @global_ignorables = Regexp.union( /offerings$/ )
+
 @modified_methods = {
   :EC2 => [{ :describe_images => { owners: ["self"] } }, { :describe_snapshots => { owner_ids: ["self"] } }]
 }
 @engine_bug_exclusions = {
   :EC2 => ["describe_images", "describe_snapshots"],
   :CloudTrail => ["list_public_keys"],
-  :Route53 => ["get_checker_ip_ranges", "list_hosted_zones", "list_geo_locations"]
+  :Route53 => ["get_checker_ip_ranges", "list_hosted_zones", "list_geo_locations"],
+  :SSM => ["describe_available_patches", "describe_patch_baselines", "list_documents"]
 }
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
@@ -29,6 +30,8 @@ require 'yaml'
   :RDS => ["describe_reserved_db_instances_offerings"]
 
 }
+
+@yaml_doc = { 'variables' => {} }
 
 def get_options(service_sym, method_sym)
   modified_service_call_hash = @modified_methods[service_sym]
@@ -233,13 +236,17 @@ end
   #                   "array",
   #                   service_rules)
 
+  region_string = "regions ${AUDIT_AWS_INVENTORY_REGIONS}"
+  if @specify_services
+    region_string = "regions ['us-east-1']"
+  end
   writeLine <<-EOH
   
 coreo_aws_rule_runner "#{service.downcase}-inventory-runner" do
   action :run
   service :#{service}
   rules #{service_rules}
-  #{service.downcase.eql?("iam") ? "" : "regions ${AUDIT_AWS_INVENTORY_REGIONS}"}
+  #{service.downcase.eql?("iam") ? "" : region_string}
 end
   EOH
 }

@@ -982,8 +982,7 @@
 #     - id: activation_list.activation_id
 #   - describe_automation_executions({})
 #     - id: automation_execution_metadata_list.automation_execution_id
-#   - describe_available_patches({})
-#     - id: patches.id
+#   - describe_available_patches <- SKIPPING due to @engine_bug_exclusions
 #   - describe_effective_instance_associations({})
 #   - describe_instance_associations_status({})
 #   - describe_instance_patch_states({})
@@ -997,8 +996,7 @@
 #     - id: window_identities.window_id
 #   - describe_parameters({})
 #     - id: parameters.key_id
-#   - describe_patch_baselines({})
-#     - id: baseline_identities.baseline_id
+#   - describe_patch_baselines <- SKIPPING due to @engine_bug_exclusions
 #   - describe_patch_groups({})
 #     - id: mappings.baseline_identity.baseline_id
 #   - get_parameters({})
@@ -1009,8 +1007,7 @@
 #   - list_commands({})
 #     - id: commands.notification_config.notification_arn
 #   - list_document_versions({})
-#   - list_documents({})
-#     - id: document_identifiers.platform_types
+#   - list_documents <- SKIPPING due to @engine_bug_exclusions
 #   - list_inventory_entries({})
 # STS
 # SWF
@@ -6320,23 +6317,6 @@ coreo_aws_rule "ssm-inventory-automation-executions" do
   id_map ["object.automation_execution_metadata_list.automation_execution_id"]
   
 end
-coreo_aws_rule "ssm-inventory-available-patches" do
-  service :SSM
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "SSM Available Patches Inventory"
-  description "This rule performs an inventory on the SSM service using the describe_available_patches function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_available_patches"]
-  audit_objects ["object.patches.id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.patches.id"]
-  
-end
 coreo_aws_rule "ssm-inventory-maintenance-windows" do
   service :SSM
   action :define
@@ -6369,23 +6349,6 @@ coreo_aws_rule "ssm-inventory-parameters" do
   operators ["=~"]
   raise_when [//]
   id_map ["object.parameters.key_id"]
-  
-end
-coreo_aws_rule "ssm-inventory-patch-baselines" do
-  service :SSM
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "SSM Patch Baselines Inventory"
-  description "This rule performs an inventory on the SSM service using the describe_patch_baselines function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_patch_baselines"]
-  audit_objects ["object.baseline_identities.baseline_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.baseline_identities.baseline_id"]
   
 end
 coreo_aws_rule "ssm-inventory-patch-groups" do
@@ -6456,28 +6419,11 @@ coreo_aws_rule "ssm-inventory-commands" do
   id_map ["object.commands.notification_config.notification_arn"]
   
 end
-coreo_aws_rule "ssm-inventory-documents" do
-  service :SSM
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "SSM Documents Inventory"
-  description "This rule performs an inventory on the SSM service using the list_documents function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["list_documents"]
-  audit_objects ["object.document_identifiers.platform_types"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.document_identifiers.platform_types"]
-  
-end
   
 coreo_aws_rule_runner "ssm-inventory-runner" do
   action :run
   service :SSM
-  rules ["ssm-inventory-activations", "ssm-inventory-automation-executions", "ssm-inventory-available-patches", "ssm-inventory-maintenance-windows", "ssm-inventory-parameters", "ssm-inventory-patch-baselines", "ssm-inventory-patch-groups", "ssm-inventory-associations", "ssm-inventory-command-invocations", "ssm-inventory-commands", "ssm-inventory-documents"]
+  rules ["ssm-inventory-activations", "ssm-inventory-automation-executions", "ssm-inventory-maintenance-windows", "ssm-inventory-parameters", "ssm-inventory-patch-groups", "ssm-inventory-associations", "ssm-inventory-command-invocations", "ssm-inventory-commands"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "servicecatalog-inventory-accepted-portfolio-shares" do
