@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
-# @specify_services = ["Route53", "SSM"]
+@specify_services = ["Route53"]
 
 @global_ignorables = Regexp.union( /offerings$/ )
 
