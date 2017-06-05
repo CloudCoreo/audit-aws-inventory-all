@@ -4,13 +4,16 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
+@specify_services = ["Route53"]
+
 @yaml_doc = { 'variables' => {} }
 @modified_methods = {
   :EC2 => [{ :describe_images => { owners: ["self"] } }, { :describe_snapshots => { owner_ids: ["self"] } }]
 }
 @engine_bug_exclusions = {
   :EC2 => ["describe_images", "describe_snapshots"],
-  :CloudTrail => ["list_public_keys"]
+  :CloudTrail => ["list_public_keys"],
+  :Route53 => ["get_checker_ip_ranges"]
 }
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
@@ -135,7 +138,7 @@ end
 
 Aws.partition('aws').services.each do |s|
   writeLine "# #{s.name}"
-  # next unless s.name.eql?("EC2")
+  next unless @specify_services.size > 0 && @specify_services.include?(s.name)
   begin
     aws_client = eval("Aws::#{s.name}::Client.new")
   rescue Exception => e
