@@ -5,17 +5,17 @@ require 'open-uri'
 require 'yaml'
 
 @yaml_doc = { 'variables' => {} }
-@modified_methdos = {
+@modified_methods = {
   :EC2 => [{ :describe_images => { owners: ["self"] } }, { :describe_snapshots => { owner_ids: ["self"] } }]
 }
 @engine_bug_exclusions = {
-  :EC2 => ["describe_images", "describe_snapshots"]
+  :EC2 => ["describe_images", "describe_snapshots"],
+  :CloudTrail => ["list_public_keys"]
 }
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
   :DatabaseMigrationService => ["describe_account_attributes", "describe_endpoint_types"],
   :DirectConnect => ["describe_locations"],
-  :CodePipeline => ["list_action_types"],
   :CodeDeploy => ["list_deployment_configs"],
   :CodeBuild => ["list_curated_environment_images"],
   :CloudHSM => ["list_available_zones"],
@@ -25,7 +25,7 @@ require 'yaml'
 }
 
 def get_options(service_sym, method_sym)
-  modified_service_call_hash = @modified_methdos[service_sym]
+  modified_service_call_hash = @modified_methods[service_sym]
   if modified_service_call_hash
     modified_service_call_hash.each { |m_hash|
       m_hash.each { |method, options|
@@ -227,6 +227,7 @@ coreo_aws_rule_runner "#{service.downcase}-inventory-runner" do
   action :run
   service :#{service}
   rules #{service_rules}
+  #{service.downcase.eql?("iam") ? "" : "regions ${AUDIT_AWS_EC2_REGIONS}"}
 end
   EOH
 }

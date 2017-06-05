@@ -146,8 +146,7 @@
 #     - id: trail_list.trail_arn
 #   - get_event_selectors({})
 #   - get_trail_status({})
-#   - list_public_keys({})
-#     - id: public_key_list.value
+#   - list_public_keys <- SKIPPING due to @engine_bug_exclusions
 # CloudWatch
 #   - describe_alarms({})
 #     - id: metric_alarms.alarm_arn
@@ -1162,6 +1161,7 @@ coreo_aws_rule_runner "acm-inventory-runner" do
   action :run
   service :ACM
   rules ["acm-inventory-certificates"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "apigateway-inventory-api-keys" do
   service :APIGateway
@@ -1270,6 +1270,7 @@ coreo_aws_rule_runner "apigateway-inventory-runner" do
   action :run
   service :APIGateway
   rules ["apigateway-inventory-api-keys", "apigateway-inventory-client-certificates", "apigateway-inventory-domain-names", "apigateway-inventory-rest-apis", "apigateway-inventory-sdk-types", "apigateway-inventory-usage-plans"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "appstream-inventory-images" do
   service :AppStream
@@ -1327,6 +1328,7 @@ coreo_aws_rule_runner "appstream-inventory-runner" do
   action :run
   service :AppStream
   rules ["appstream-inventory-images", "appstream-inventory-fleets", "appstream-inventory-stacks"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "autoscaling-inventory-auto-scaling-groups" do
   service :AutoScaling
@@ -1435,6 +1437,7 @@ coreo_aws_rule_runner "autoscaling-inventory-runner" do
   action :run
   service :AutoScaling
   rules ["autoscaling-inventory-auto-scaling-groups", "autoscaling-inventory-auto-scaling-instances", "autoscaling-inventory-launch-configurations", "autoscaling-inventory-notification-configurations", "autoscaling-inventory-policies", "autoscaling-inventory-scheduled-actions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "batch-inventory-compute-environments" do
   service :Batch
@@ -1492,6 +1495,7 @@ coreo_aws_rule_runner "batch-inventory-runner" do
   action :run
   service :Batch
   rules ["batch-inventory-compute-environments", "batch-inventory-job-definitions", "batch-inventory-job-queues"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "clouddirectory-inventory-development-schema-arns" do
   service :CloudDirectory
@@ -1549,6 +1553,7 @@ coreo_aws_rule_runner "clouddirectory-inventory-runner" do
   action :run
   service :CloudDirectory
   rules ["clouddirectory-inventory-development-schema-arns", "clouddirectory-inventory-directories", "clouddirectory-inventory-published-schema-arns"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudformation-inventory-stacks" do
   service :CloudFormation
@@ -1606,6 +1611,7 @@ coreo_aws_rule_runner "cloudformation-inventory-runner" do
   action :run
   service :CloudFormation
   rules ["cloudformation-inventory-stacks", "cloudformation-inventory-exports", "cloudformation-inventory-stacks"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudfront-inventory-cloud-front-origin-access-identities" do
   service :CloudFront
@@ -1663,6 +1669,7 @@ coreo_aws_rule_runner "cloudfront-inventory-runner" do
   action :run
   service :CloudFront
   rules ["cloudfront-inventory-cloud-front-origin-access-identities", "cloudfront-inventory-distributions", "cloudfront-inventory-streaming-distributions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudhsm-inventory-hapgs" do
   service :CloudHSM
@@ -1720,6 +1727,7 @@ coreo_aws_rule_runner "cloudhsm-inventory-runner" do
   action :run
   service :CloudHSM
   rules ["cloudhsm-inventory-hapgs", "cloudhsm-inventory-hsms", "cloudhsm-inventory-luna-clients"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudsearch-inventory-domains" do
   service :CloudSearch
@@ -1743,6 +1751,7 @@ coreo_aws_rule_runner "cloudsearch-inventory-runner" do
   action :run
   service :CloudSearch
   rules ["cloudsearch-inventory-domains"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudtrail-inventory-trails" do
   service :CloudTrail
@@ -1761,28 +1770,12 @@ coreo_aws_rule "cloudtrail-inventory-trails" do
   id_map ["object.trail_list.trail_arn"]
   
 end
-coreo_aws_rule "cloudtrail-inventory-public-keys" do
-  service :CloudTrail
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "CloudTrail Public-keys Inventory"
-  description "This rule performs an inventory on the CloudTrail service using the list_public_keys function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["list_public_keys"]
-  audit_objects ["object.public_key_list.value"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.public_key_list.value"]
-  
-end
   
 coreo_aws_rule_runner "cloudtrail-inventory-runner" do
   action :run
   service :CloudTrail
-  rules ["cloudtrail-inventory-trails", "cloudtrail-inventory-public-keys"]
+  rules ["cloudtrail-inventory-trails"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudwatch-inventory-alarms" do
   service :CloudWatch
@@ -1823,6 +1816,7 @@ coreo_aws_rule_runner "cloudwatch-inventory-runner" do
   action :run
   service :CloudWatch
   rules ["cloudwatch-inventory-alarms", "cloudwatch-inventory-metrics"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudwatchevents-inventory-rules" do
   service :CloudWatchEvents
@@ -1846,6 +1840,7 @@ coreo_aws_rule_runner "cloudwatchevents-inventory-runner" do
   action :run
   service :CloudWatchEvents
   rules ["cloudwatchevents-inventory-rules"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "cloudwatchlogs-inventory-export-tasks" do
   service :CloudWatchLogs
@@ -1920,6 +1915,7 @@ coreo_aws_rule_runner "cloudwatchlogs-inventory-runner" do
   action :run
   service :CloudWatchLogs
   rules ["cloudwatchlogs-inventory-export-tasks", "cloudwatchlogs-inventory-destinations", "cloudwatchlogs-inventory-log-groups", "cloudwatchlogs-inventory-metric-filters"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "codebuild-inventory-builds" do
   service :CodeBuild
@@ -1960,6 +1956,7 @@ coreo_aws_rule_runner "codebuild-inventory-runner" do
   action :run
   service :CodeBuild
   rules ["codebuild-inventory-builds", "codebuild-inventory-projects"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "codecommit-inventory-repositories" do
   service :CodeCommit
@@ -1983,6 +1980,7 @@ coreo_aws_rule_runner "codecommit-inventory-runner" do
   action :run
   service :CodeCommit
   rules ["codecommit-inventory-repositories"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "codedeploy-inventory-applications" do
   service :CodeDeploy
@@ -2040,6 +2038,7 @@ coreo_aws_rule_runner "codedeploy-inventory-runner" do
   action :run
   service :CodeDeploy
   rules ["codedeploy-inventory-applications", "codedeploy-inventory-deployments", "codedeploy-inventory-on-premises-instances"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "codepipeline-inventory-pipelines" do
   service :CodePipeline
@@ -2063,6 +2062,7 @@ coreo_aws_rule_runner "codepipeline-inventory-runner" do
   action :run
   service :CodePipeline
   rules ["codepipeline-inventory-pipelines"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "codestar-inventory-projects" do
   service :CodeStar
@@ -2103,6 +2103,7 @@ coreo_aws_rule_runner "codestar-inventory-runner" do
   action :run
   service :CodeStar
   rules ["codestar-inventory-projects", "codestar-inventory-user-profiles"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "configservice-inventory-config-rule-evaluation-status" do
   service :ConfigService
@@ -2211,6 +2212,7 @@ coreo_aws_rule_runner "configservice-inventory-runner" do
   action :run
   service :ConfigService
   rules ["configservice-inventory-config-rule-evaluation-status", "configservice-inventory-config-rules", "configservice-inventory-configuration-recorder-status", "configservice-inventory-configuration-recorders", "configservice-inventory-delivery-channel-status", "configservice-inventory-delivery-channels"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "datapipeline-inventory-pipelines" do
   service :DataPipeline
@@ -2234,6 +2236,7 @@ coreo_aws_rule_runner "datapipeline-inventory-runner" do
   action :run
   service :DataPipeline
   rules ["datapipeline-inventory-pipelines"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "databasemigrationservice-inventory-certificates" do
   service :DatabaseMigrationService
@@ -2359,6 +2362,7 @@ coreo_aws_rule_runner "databasemigrationservice-inventory-runner" do
   action :run
   service :DatabaseMigrationService
   rules ["databasemigrationservice-inventory-certificates", "databasemigrationservice-inventory-connections", "databasemigrationservice-inventory-endpoints", "databasemigrationservice-inventory-orderable-replication-instances", "databasemigrationservice-inventory-replication-instances", "databasemigrationservice-inventory-replication-subnet-groups", "databasemigrationservice-inventory-replication-tasks"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "directconnect-inventory-connections" do
   service :DirectConnect
@@ -2433,6 +2437,7 @@ coreo_aws_rule_runner "directconnect-inventory-runner" do
   action :run
   service :DirectConnect
   rules ["directconnect-inventory-connections", "directconnect-inventory-lags", "directconnect-inventory-virtual-gateways", "directconnect-inventory-virtual-interfaces"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "directoryservice-inventory-snapshots" do
   service :DirectoryService
@@ -2507,6 +2512,7 @@ coreo_aws_rule_runner "directoryservice-inventory-runner" do
   action :run
   service :DirectoryService
   rules ["directoryservice-inventory-snapshots", "directoryservice-inventory-directories", "directoryservice-inventory-event-topics", "directoryservice-inventory-trusts"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "dynamodb-inventory-tables" do
   service :DynamoDB
@@ -2530,6 +2536,7 @@ coreo_aws_rule_runner "dynamodb-inventory-runner" do
   action :run
   service :DynamoDB
   rules ["dynamodb-inventory-tables"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "dynamodbstreams-inventory-streams" do
   service :DynamoDBStreams
@@ -2553,6 +2560,7 @@ coreo_aws_rule_runner "dynamodbstreams-inventory-runner" do
   action :run
   service :DynamoDBStreams
   rules ["dynamodbstreams-inventory-streams"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "ec2-inventory-account-attributes" do
   service :EC2
@@ -3324,6 +3332,7 @@ coreo_aws_rule_runner "ec2-inventory-runner" do
   action :run
   service :EC2
   rules ["ec2-inventory-account-attributes", "ec2-inventory-addresses", "ec2-inventory-availability-zones", "ec2-inventory-bundle-tasks", "ec2-inventory-classic-link-instances", "ec2-inventory-conversion-tasks", "ec2-inventory-customer-gateways", "ec2-inventory-dhcp-options", "ec2-inventory-egress-only-internet-gateways", "ec2-inventory-export-tasks", "ec2-inventory-flow-logs", "ec2-inventory-host-reservations", "ec2-inventory-hosts", "ec2-inventory-iam-instance-profile-associations", "ec2-inventory-import-image-tasks", "ec2-inventory-import-snapshot-tasks", "ec2-inventory-instance-status", "ec2-inventory-instances", "ec2-inventory-internet-gateways", "ec2-inventory-key-pairs", "ec2-inventory-moving-addresses", "ec2-inventory-nat-gateways", "ec2-inventory-network-acls", "ec2-inventory-network-interfaces", "ec2-inventory-placement-groups", "ec2-inventory-prefix-lists", "ec2-inventory-reserved-instances", "ec2-inventory-reserved-instances-modifications", "ec2-inventory-reserved-instances-offerings", "ec2-inventory-route-tables", "ec2-inventory-scheduled-instances", "ec2-inventory-security-groups", "ec2-inventory-spot-fleet-requests", "ec2-inventory-spot-instance-requests", "ec2-inventory-subnets", "ec2-inventory-volume-status", "ec2-inventory-volumes", "ec2-inventory-volumes-modifications", "ec2-inventory-vpc-endpoint-services", "ec2-inventory-vpc-endpoints", "ec2-inventory-vpc-peering-connections", "ec2-inventory-vpcs", "ec2-inventory-vpn-connections", "ec2-inventory-vpn-gateways", "ec2-inventory-regions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "ecr-inventory-repositories" do
   service :ECR
@@ -3347,6 +3356,7 @@ coreo_aws_rule_runner "ecr-inventory-runner" do
   action :run
   service :ECR
   rules ["ecr-inventory-repositories"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "ecs-inventory-clusters" do
   service :ECS
@@ -3421,6 +3431,7 @@ coreo_aws_rule_runner "ecs-inventory-runner" do
   action :run
   service :ECS
   rules ["ecs-inventory-clusters", "ecs-inventory-clusters", "ecs-inventory-task-definition-families", "ecs-inventory-task-definitions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "efs-inventory-file-systems" do
   service :EFS
@@ -3444,6 +3455,7 @@ coreo_aws_rule_runner "efs-inventory-runner" do
   action :run
   service :EFS
   rules ["efs-inventory-file-systems"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "emr-inventory-clusters" do
   service :EMR
@@ -3484,6 +3496,7 @@ coreo_aws_rule_runner "emr-inventory-runner" do
   action :run
   service :EMR
   rules ["emr-inventory-clusters", "emr-inventory-security-configurations"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "elasticache-inventory-snapshots" do
   service :ElastiCache
@@ -3643,6 +3656,7 @@ coreo_aws_rule_runner "elasticache-inventory-runner" do
   action :run
   service :ElastiCache
   rules ["elasticache-inventory-snapshots", "elasticache-inventory-cache-clusters", "elasticache-inventory-cache-engine-versions", "elasticache-inventory-cache-parameter-groups", "elasticache-inventory-cache-subnet-groups", "elasticache-inventory-events", "elasticache-inventory-replication-groups", "elasticache-inventory-reserved-cache-nodes", "elasticache-inventory-reserved-cache-nodes-offerings"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "elasticbeanstalk-inventory-events" do
   service :ElasticBeanstalk
@@ -3768,6 +3782,7 @@ coreo_aws_rule_runner "elasticbeanstalk-inventory-runner" do
   action :run
   service :ElasticBeanstalk
   rules ["elasticbeanstalk-inventory-events", "elasticbeanstalk-inventory-application-versions", "elasticbeanstalk-inventory-applications", "elasticbeanstalk-inventory-configuration-options", "elasticbeanstalk-inventory-environments", "elasticbeanstalk-inventory-available-solution-stacks", "elasticbeanstalk-inventory-platform-versions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "elasticloadbalancing-inventory-load-balancers" do
   service :ElasticLoadBalancing
@@ -3825,6 +3840,7 @@ coreo_aws_rule_runner "elasticloadbalancing-inventory-runner" do
   action :run
   service :ElasticLoadBalancing
   rules ["elasticloadbalancing-inventory-load-balancers", "elasticloadbalancing-inventory-load-balancer-policies", "elasticloadbalancing-inventory-load-balancer-policy-types"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "elasticloadbalancingv2-inventory-load-balancers" do
   service :ElasticLoadBalancingV2
@@ -3882,6 +3898,7 @@ coreo_aws_rule_runner "elasticloadbalancingv2-inventory-runner" do
   action :run
   service :ElasticLoadBalancingV2
   rules ["elasticloadbalancingv2-inventory-load-balancers", "elasticloadbalancingv2-inventory-ssl-policies", "elasticloadbalancingv2-inventory-targroups"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "elastictranscoder-inventory-pipelines" do
   service :ElasticTranscoder
@@ -3922,6 +3939,7 @@ coreo_aws_rule_runner "elastictranscoder-inventory-runner" do
   action :run
   service :ElasticTranscoder
   rules ["elastictranscoder-inventory-pipelines", "elastictranscoder-inventory-presets"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "elasticsearchservice-inventory-domain-names" do
   service :ElasticsearchService
@@ -3962,6 +3980,7 @@ coreo_aws_rule_runner "elasticsearchservice-inventory-runner" do
   action :run
   service :ElasticsearchService
   rules ["elasticsearchservice-inventory-domain-names", "elasticsearchservice-inventory-elasticsearch-versions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "firehose-inventory-delivery-streams" do
   service :Firehose
@@ -3985,6 +4004,7 @@ coreo_aws_rule_runner "firehose-inventory-runner" do
   action :run
   service :Firehose
   rules ["firehose-inventory-delivery-streams"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "gamelift-inventory-builds" do
   service :GameLift
@@ -4093,6 +4113,7 @@ coreo_aws_rule_runner "gamelift-inventory-runner" do
   action :run
   service :GameLift
   rules ["gamelift-inventory-builds", "gamelift-inventory-ec2-instance-limits", "gamelift-inventory-fleet-attributes", "gamelift-inventory-game-session-queues", "gamelift-inventory-aliases", "gamelift-inventory-fleets"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "glacier-inventory-vaults" do
   service :Glacier
@@ -4116,6 +4137,7 @@ coreo_aws_rule_runner "glacier-inventory-runner" do
   action :run
   service :Glacier
   rules ["glacier-inventory-vaults"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "iam-inventory-account-authorization-details" do
   service :IAM
@@ -4394,6 +4416,7 @@ coreo_aws_rule_runner "iam-inventory-runner" do
   action :run
   service :IAM
   rules ["iam-inventory-account-authorization-details", "iam-inventory-access-keys", "iam-inventory-account-aliases", "iam-inventory-groups", "iam-inventory-instance-profiles", "iam-inventory-policies", "iam-inventory-mfa-devices", "iam-inventory-open-id-connect-providers", "iam-inventory-saml-providers", "iam-inventory-ssh-public-keys", "iam-inventory-roles", "iam-inventory-signing-certificates", "iam-inventory-server-certificates", "iam-inventory-service-specific-credentials", "iam-inventory-virtual-mfa-devices", "iam-inventory-users"]
+  
 end
 coreo_aws_rule "importexport-inventory-jobs" do
   service :ImportExport
@@ -4417,6 +4440,7 @@ coreo_aws_rule_runner "importexport-inventory-runner" do
   action :run
   service :ImportExport
   rules ["importexport-inventory-jobs"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "inspector-inventory-assessment-runs" do
   service :Inspector
@@ -4525,6 +4549,7 @@ coreo_aws_rule_runner "inspector-inventory-runner" do
   action :run
   service :Inspector
   rules ["inspector-inventory-assessment-runs", "inspector-inventory-assessment-targets", "inspector-inventory-assessment-templates", "inspector-inventory-event-subscriptions", "inspector-inventory-findings", "inspector-inventory-rules-packages"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "iot-inventory-certificates" do
   service :IoT
@@ -4650,6 +4675,7 @@ coreo_aws_rule_runner "iot-inventory-runner" do
   action :run
   service :IoT
   rules ["iot-inventory-certificates", "iot-inventory-policies", "iot-inventory-ca-certificates", "iot-inventory-outgoing-certificates", "iot-inventory-thing-types", "iot-inventory-things", "iot-inventory-topic-rules"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "kms-inventory-aliases" do
   service :KMS
@@ -4690,6 +4716,7 @@ coreo_aws_rule_runner "kms-inventory-runner" do
   action :run
   service :KMS
   rules ["kms-inventory-aliases", "kms-inventory-keys"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "kinesis-inventory-streams" do
   service :Kinesis
@@ -4713,6 +4740,7 @@ coreo_aws_rule_runner "kinesis-inventory-runner" do
   action :run
   service :Kinesis
   rules ["kinesis-inventory-streams"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "kinesisanalytics-inventory-applications" do
   service :KinesisAnalytics
@@ -4736,6 +4764,7 @@ coreo_aws_rule_runner "kinesisanalytics-inventory-runner" do
   action :run
   service :KinesisAnalytics
   rules ["kinesisanalytics-inventory-applications"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "lambda-inventory-event-source-mappings" do
   service :Lambda
@@ -4776,6 +4805,7 @@ coreo_aws_rule_runner "lambda-inventory-runner" do
   action :run
   service :Lambda
   rules ["lambda-inventory-event-source-mappings", "lambda-inventory-functions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "lambdapreview-inventory-functions" do
   service :LambdaPreview
@@ -4816,6 +4846,7 @@ coreo_aws_rule_runner "lambdapreview-inventory-runner" do
   action :run
   service :LambdaPreview
   rules ["lambdapreview-inventory-functions", "lambdapreview-inventory-event-sources"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "lexmodelbuildingservice-inventory-bots" do
   service :LexModelBuildingService
@@ -4907,6 +4938,7 @@ coreo_aws_rule_runner "lexmodelbuildingservice-inventory-runner" do
   action :run
   service :LexModelBuildingService
   rules ["lexmodelbuildingservice-inventory-bots", "lexmodelbuildingservice-inventory-builtin-intents", "lexmodelbuildingservice-inventory-builtin-slot-types", "lexmodelbuildingservice-inventory-intents", "lexmodelbuildingservice-inventory-slot-types"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "lightsail-inventory-regions" do
   service :Lightsail
@@ -5083,6 +5115,7 @@ coreo_aws_rule_runner "lightsail-inventory-runner" do
   action :run
   service :Lightsail
   rules ["lightsail-inventory-regions", "lightsail-inventory-active-names", "lightsail-inventory-blueprints", "lightsail-inventory-bundles", "lightsail-inventory-domains", "lightsail-inventory-instance-snapshots", "lightsail-inventory-instances", "lightsail-inventory-key-pairs", "lightsail-inventory-operations", "lightsail-inventory-static-ips"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "machinelearning-inventory-batch-predictions" do
   service :MachineLearning
@@ -5157,6 +5190,7 @@ coreo_aws_rule_runner "machinelearning-inventory-runner" do
   action :run
   service :MachineLearning
   rules ["machinelearning-inventory-batch-predictions", "machinelearning-inventory-data-sources", "machinelearning-inventory-evaluations", "machinelearning-inventory-ml-models"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "opsworks-inventory-stacks" do
   service :OpsWorks
@@ -5214,6 +5248,7 @@ coreo_aws_rule_runner "opsworks-inventory-runner" do
   action :run
   service :OpsWorks
   rules ["opsworks-inventory-stacks", "opsworks-inventory-service-errors", "opsworks-inventory-user-profiles"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "opsworkscm-inventory-account-attributes" do
   service :OpsWorksCM
@@ -5271,6 +5306,7 @@ coreo_aws_rule_runner "opsworkscm-inventory-runner" do
   action :run
   service :OpsWorksCM
   rules ["opsworkscm-inventory-account-attributes", "opsworkscm-inventory-backups", "opsworkscm-inventory-servers"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "polly-inventory-voices" do
   service :Polly
@@ -5311,6 +5347,7 @@ coreo_aws_rule_runner "polly-inventory-runner" do
   action :run
   service :Polly
   rules ["polly-inventory-voices", "polly-inventory-lexicons"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "rds-inventory-events" do
   service :RDS
@@ -5640,6 +5677,7 @@ coreo_aws_rule_runner "rds-inventory-runner" do
   action :run
   service :RDS
   rules ["rds-inventory-events", "rds-inventory-certificates", "rds-inventory-account-attributes", "rds-inventory-db-clusters", "rds-inventory-db-cluster-parameter-groups", "rds-inventory-db-instances", "rds-inventory-db-engine-versions", "rds-inventory-db-cluster-snapshots", "rds-inventory-db-parameter-groups", "rds-inventory-db-security-groups", "rds-inventory-db-snapshots", "rds-inventory-db-subnet-groups", "rds-inventory-event-categories", "rds-inventory-event-subscriptions", "rds-inventory-option-groups", "rds-inventory-pending-maintenance-actions", "rds-inventory-reserved-db-instances", "rds-inventory-reserved-db-instances-offerings", "rds-inventory-source-regions"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "redshift-inventory-clusters" do
   service :Redshift
@@ -5884,6 +5922,7 @@ coreo_aws_rule_runner "redshift-inventory-runner" do
   action :run
   service :Redshift
   rules ["redshift-inventory-clusters", "redshift-inventory-events", "redshift-inventory-event-categories", "redshift-inventory-event-subscriptions", "redshift-inventory-cluster-parameter-groups", "redshift-inventory-cluster-snapshots", "redshift-inventory-cluster-subnet-groups", "redshift-inventory-cluster-versions", "redshift-inventory-hsm-client-certificates", "redshift-inventory-hsm-configurations", "redshift-inventory-orderable-cluster-options", "redshift-inventory-reserved-node-offerings", "redshift-inventory-reserved-nodes", "redshift-inventory-snapshot-copy-grants"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "rekognition-inventory-collections" do
   service :Rekognition
@@ -5907,6 +5946,7 @@ coreo_aws_rule_runner "rekognition-inventory-runner" do
   action :run
   service :Rekognition
   rules ["rekognition-inventory-collections"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "resourcegroupstaggingapi-inventory-tag-keys" do
   service :ResourceGroupsTaggingAPI
@@ -5930,6 +5970,7 @@ coreo_aws_rule_runner "resourcegroupstaggingapi-inventory-runner" do
   action :run
   service :ResourceGroupsTaggingAPI
   rules ["resourcegroupstaggingapi-inventory-tag-keys"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "route53-inventory-checker-ip-ranges" do
   service :Route53
@@ -6055,6 +6096,7 @@ coreo_aws_rule_runner "route53-inventory-runner" do
   action :run
   service :Route53
   rules ["route53-inventory-checker-ip-ranges", "route53-inventory-geo-locations", "route53-inventory-health-checks", "route53-inventory-hosted-zones", "route53-inventory-reusable-delegation-sets", "route53-inventory-traffic-policies", "route53-inventory-traffic-policy-instances"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "route53domains-inventory-domains" do
   service :Route53Domains
@@ -6095,6 +6137,7 @@ coreo_aws_rule_runner "route53domains-inventory-runner" do
   action :run
   service :Route53Domains
   rules ["route53domains-inventory-domains", "route53domains-inventory-operations"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "s3-inventory-buckets" do
   service :S3
@@ -6118,6 +6161,7 @@ coreo_aws_rule_runner "s3-inventory-runner" do
   action :run
   service :S3
   rules ["s3-inventory-buckets"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "ses-inventory-identities" do
   service :SES
@@ -6226,6 +6270,7 @@ coreo_aws_rule_runner "ses-inventory-runner" do
   action :run
   service :SES
   rules ["ses-inventory-identities", "ses-inventory-send-statistics", "ses-inventory-configuration-sets", "ses-inventory-receipt-filters", "ses-inventory-receipt-rule-sets", "ses-inventory-verified-email-addresses"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "sms-inventory-connectors" do
   service :SMS
@@ -6283,6 +6328,7 @@ coreo_aws_rule_runner "sms-inventory-runner" do
   action :run
   service :SMS
   rules ["sms-inventory-connectors", "sms-inventory-replication-jobs", "sms-inventory-servers"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "sns-inventory-platform-applications" do
   service :SNS
@@ -6340,6 +6386,7 @@ coreo_aws_rule_runner "sns-inventory-runner" do
   action :run
   service :SNS
   rules ["sns-inventory-platform-applications", "sns-inventory-subscriptions", "sns-inventory-topics"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "sqs-inventory-queues" do
   service :SQS
@@ -6363,6 +6410,7 @@ coreo_aws_rule_runner "sqs-inventory-runner" do
   action :run
   service :SQS
   rules ["sqs-inventory-queues"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "ssm-inventory-activations" do
   service :SSM
@@ -6556,6 +6604,7 @@ coreo_aws_rule_runner "ssm-inventory-runner" do
   action :run
   service :SSM
   rules ["ssm-inventory-activations", "ssm-inventory-automation-executions", "ssm-inventory-available-patches", "ssm-inventory-maintenance-windows", "ssm-inventory-parameters", "ssm-inventory-patch-baselines", "ssm-inventory-patch-groups", "ssm-inventory-associations", "ssm-inventory-command-invocations", "ssm-inventory-commands", "ssm-inventory-documents"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "servicecatalog-inventory-accepted-portfolio-shares" do
   service :ServiceCatalog
@@ -6596,6 +6645,7 @@ coreo_aws_rule_runner "servicecatalog-inventory-runner" do
   action :run
   service :ServiceCatalog
   rules ["servicecatalog-inventory-accepted-portfolio-shares", "servicecatalog-inventory-portfolios"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "shield-inventory-attacks" do
   service :Shield
@@ -6619,6 +6669,7 @@ coreo_aws_rule_runner "shield-inventory-runner" do
   action :run
   service :Shield
   rules ["shield-inventory-attacks"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "simpledb-inventory-domains" do
   service :SimpleDB
@@ -6642,6 +6693,7 @@ coreo_aws_rule_runner "simpledb-inventory-runner" do
   action :run
   service :SimpleDB
   rules ["simpledb-inventory-domains"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "snowball-inventory-addresses" do
   service :Snowball
@@ -6699,6 +6751,7 @@ coreo_aws_rule_runner "snowball-inventory-runner" do
   action :run
   service :Snowball
   rules ["snowball-inventory-addresses", "snowball-inventory-jobs", "snowball-inventory-clusters"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "states-inventory-activities" do
   service :States
@@ -6739,6 +6792,7 @@ coreo_aws_rule_runner "states-inventory-runner" do
   action :run
   service :States
   rules ["states-inventory-activities", "states-inventory-state-machines"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "storagegateway-inventory-tape-archives" do
   service :StorageGateway
@@ -6830,6 +6884,7 @@ coreo_aws_rule_runner "storagegateway-inventory-runner" do
   action :run
   service :StorageGateway
   rules ["storagegateway-inventory-tape-archives", "storagegateway-inventory-file-shares", "storagegateway-inventory-gateways", "storagegateway-inventory-tapes", "storagegateway-inventory-volumes"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "waf-inventory-rules" do
   service :WAF
@@ -6955,6 +7010,7 @@ coreo_aws_rule_runner "waf-inventory-runner" do
   action :run
   service :WAF
   rules ["waf-inventory-rules", "waf-inventory-byte-match-sets", "waf-inventory-ip-sets", "waf-inventory-size-constraint-sets", "waf-inventory-sql-injection-match-sets", "waf-inventory-web-acls", "waf-inventory-xss-match-sets"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "wafregional-inventory-rules" do
   service :WAFRegional
@@ -7080,6 +7136,7 @@ coreo_aws_rule_runner "wafregional-inventory-runner" do
   action :run
   service :WAFRegional
   rules ["wafregional-inventory-rules", "wafregional-inventory-byte-match-sets", "wafregional-inventory-ip-sets", "wafregional-inventory-size-constraint-sets", "wafregional-inventory-sql-injection-match-sets", "wafregional-inventory-web-acls", "wafregional-inventory-xss-match-sets"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
 coreo_aws_rule "workspaces-inventory-workspace-bundles" do
   service :WorkSpaces
@@ -7154,4 +7211,5 @@ coreo_aws_rule_runner "workspaces-inventory-runner" do
   action :run
   service :WorkSpaces
   rules ["workspaces-inventory-workspace-bundles", "workspaces-inventory-workspace-directories", "workspaces-inventory-workspaces", "workspaces-inventory-workspaces-connection-status"]
+  regions ${AUDIT_AWS_EC2_REGIONS}
 end
