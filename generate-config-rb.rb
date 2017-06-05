@@ -14,8 +14,8 @@ require 'yaml'
 @engine_bug_exclusions = {
   :EC2 => ["describe_images", "describe_snapshots"],
   :CloudTrail => ["list_public_keys"],
-  :Route53 => ["get_checker_ip_ranges", "list_hosted_zones", "list_geo_locations", "list_reusable_delegation_sets"],
-  :SSM => ["route53-inventory-health-checks","route53-inventory-traffic-policy-instances","route53-inventory-traffic-policies","describe_available_patches", "describe_patch_baselines", "list_documents"]
+  :Route53 => ["list_traffic_policy_instances","list_traffic_policies","get_checker_ip_ranges", "list_hosted_zones", "list_geo_locations", "list_reusable_delegation_sets"],
+  :SSM => ["describe_available_patches", "describe_patch_baselines", "list_documents"]
 }
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
