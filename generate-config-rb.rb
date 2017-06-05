@@ -227,7 +227,7 @@ coreo_aws_rule_runner "#{service.downcase}-inventory-runner" do
   action :run
   service :#{service}
   rules #{service_rules}
-  #{service.downcase.eql?("iam") ? "" : "regions ${AUDIT_AWS_EC2_REGIONS}"}
+  #{service.downcase.eql?("iam") ? "" : "regions ${AUDIT_AWS_INVENTORY_REGIONS}"}
 end
   EOH
 }
