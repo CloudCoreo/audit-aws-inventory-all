@@ -5,6 +5,36 @@ require 'open-uri'
 require 'yaml'
 
 @yaml_doc = { 'variables' => {} }
+@modified_methdos = {
+  :EC2 => [{ :describe_images => { owners: ["self"] } }, { :describe_snapshots => { owner_ids: ["self"] } }]
+}
+@engine_bug_exclusions = {
+  :EC2 => ["describe_images", "describe_snapshots"]
+}
+@useless_methods = {
+  :CodePipeline => ["list_action_types"],
+  :DatabaseMigrationService => ["describe_account_attributes", "describe_endpoint_types"],
+  :DirectConnect => ["describe_locations"],
+  :CodePipeline => ["list_action_types"],
+  :CodeDeploy => ["list_deployment_configs"],
+  :CodeBuild => ["list_curated_environment_images"],
+  :CloudHSM => ["list_available_zones"],
+  :CloudFormation => ["describe_account_limits"],
+  :AutoScaling => ["describe_scaling_activities", "describe_adjustment_types", "describe_auto_scaling_notification_types", "describe_lifecycle_hook_types", "describe_metric_collection_types", "describe_scaling_process_types", "describe_termination_policy_types"]
+
+}
+
+def get_options(service_sym, method_sym)
+  modified_service_call_hash = @modified_methdos[service_sym]
+  if modified_service_call_hash
+    modified_service_call_hash.each { |m_hash|
+      m_hash.each { |method, options|
+        return options if method.eql?(method_sym)
+      }
+    }
+  end
+  return {}
+end
 
 def get_regions
   @ec2_regions = Aws::EC2::Client.new.describe_regions().regions.collect { |x| x.region_name }.sort
@@ -83,9 +113,13 @@ def get_id_from_possibilities(possible_ids)
   return "NA"
 end
 
+@docs = {}
+
 def getEntryFromHtml(service, method)
   url = "http://docs.aws.amazon.com/sdkforruby/api/Aws/#{service}/Client.html"
-  doc = Nokogiri::HTML(open(url))
+  doc = Nokogiri::HTML(open(url)) unless @docs[url]
+  @docs[url] = doc if doc
+  doc = @docs[url]
   method_doc = doc.at_css("[id=\"#{method}-instance_method\"]").parent
   tag_doc = method_doc.at_css('[class=tags]')
   example_doc = tag_doc.css('pre[class="example code"]').last
@@ -101,6 +135,7 @@ end
 
 Aws.partition('aws').services.each do |s|
   writeLine "# #{s.name}"
+  # next unless s.name.eql?("EC2")
   begin
     aws_client = eval("Aws::#{s.name}::Client.new")
   rescue Exception => e
@@ -111,11 +146,20 @@ Aws.partition('aws').services.each do |s|
   relevant_methods = aws_client.methods.collect { |method| method if method =~ /(get|describe|list)/ }.compact.reject { |method| method.empty? || method =~ /tags/ || method !~ /s$/ }
   ## we have a client
 
-
   ## if it doesnt require and argument, it is an inventory method
   relevant_methods.each { |r|
+    if @useless_methods[s.name.to_sym] && @useless_methods[s.name.to_sym].include?(r.to_s)
+      writeLine "#   - #{r} <- SKIPPING due to @useless_methods"
+      next
+    end
+    if @engine_bug_exclusions[s.name.to_sym] && @engine_bug_exclusions[s.name.to_sym].include?(r.to_s)
+      writeLine "#   - #{r} <- SKIPPING due to @engine_bug_exclusions"
+      next
+    end
     begin
-      aws_client.send(r.to_sym, {})
+      opts = get_options(s.name.to_sym, r.to_sym)
+      writeLine "#   - #{r}(#{opts})"
+      aws_client.send(r.to_sym, opts)
       ## now check if we have a proper @id_map
       if !@id_map[aws_client.class.to_s.split('::')[1].to_sym] || !@id_map[aws_client.class.to_s.split('::')[1].to_sym][r.to_sym]
         id = getEntryFromHtml(aws_client.class.to_s.split('::')[1], r)
@@ -123,8 +167,9 @@ Aws.partition('aws').services.each do |s|
           @id_map[aws_client.class.to_s.split('::')[1].to_sym] = {}
           @id_map[aws_client.class.to_s.split('::')[1].to_sym][:methods] = {}
         end
-        @id_map[aws_client.class.to_s.split('::')[1].to_sym][:methods][r.to_sym] = id
-        writeLine "#   - #{r}"
+        @id_map[aws_client.class.to_s.split('::')[1].to_sym][:methods][r.to_sym] = {}
+        @id_map[aws_client.class.to_s.split('::')[1].to_sym][:methods][r.to_sym][:id] = id
+        @id_map[aws_client.class.to_s.split('::')[1].to_sym][:methods][r.to_sym][:mod] = opts
         writeLine "#     - id: #{id}"
       end
       ## client per service
@@ -141,10 +186,13 @@ end
   service = s.to_s
   sClass = c.class.to_s.split('::')[1]
   service_rules = []
-  inv_hash[:methods].each_pair { |method, id|
+  inv_hash[:methods].each_pair { |method, m_hash|
+    id = m_hash[:id]
+    modifier = m_hash[:mod]
     next if id.eql?("NA")
     m = method.to_s
-    rule_name = "#{service.downcase}-inventory-#{m.downcase.gsub('list_', '').gsub('describe_', '').gsub('get_', '').gsub('_', '-')}"
+    rule_detail = "#{m.downcase.gsub('list_', '').gsub('describe_', '').gsub('get_', '').gsub('_', '-')}"
+    rule_name = "#{service.downcase}-inventory-#{rule_detail}"
     service_rules.push(rule_name)
     writeLine <<-EOH
 coreo_aws_rule "#{rule_name}" do
@@ -152,7 +200,7 @@ coreo_aws_rule "#{rule_name}" do
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
-  display_name "#{sClass} Inventory"
+  display_name "#{sClass} #{rule_detail.capitalize} Inventory"
   description "This rule performs an inventory on the #{sClass} service using the #{m} function"
   category "Inventory"
   suggested_action "None."
@@ -162,6 +210,7 @@ coreo_aws_rule "#{rule_name}" do
   operators ["=~"]
   raise_when [//]
   id_map ["object.#{id}"]
+  #{modifier.empty? ? "" : "call_modifiers [#{modifier}]"}
 end
     EOH
   }
