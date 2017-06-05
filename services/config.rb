@@ -1,5 +1,4 @@
 # ACM
-# ACM
 #   - list_certificates({})
 #     - id: certificate_summary_list.certificate_arn
 # APIGateway
@@ -285,7 +284,7 @@
 #   - list_network_profiles({})
 #   - list_offering_promotions({})
 #   - list_offering_transactions({})
-#   - list_offerings({})
+#   - list_offerings <- SKIPPING due to @global_ignorables
 #   - list_remote_access_sessions({})
 #   - list_runs({})
 #   - list_samples({})
@@ -352,7 +351,7 @@
 #     - id: export_tasks.export_task_id
 #   - describe_flow_logs({})
 #     - id: flow_logs.deliver_logs_permission_arn
-#   - describe_host_reservation_offerings({})
+#   - describe_host_reservation_offerings <- SKIPPING due to @global_ignorables
 #   - describe_host_reservations({})
 #     - id: host_reservation_set.offering_id
 #   - describe_hosts({})
@@ -388,8 +387,7 @@
 #   - describe_reserved_instances_listings({})
 #   - describe_reserved_instances_modifications({})
 #     - id: reserved_instances_modifications.reserved_instances_modification_id
-#   - describe_reserved_instances_offerings({})
-#     - id: reserved_instances_offerings.reserved_instances_offering_id
+#   - describe_reserved_instances_offerings <- SKIPPING due to @global_ignorables
 #   - describe_route_tables({})
 #     - id: route_tables.route_table_id
 #   - describe_scheduled_instances({})
@@ -485,8 +483,7 @@
 #     - id: replication_groups.replication_group_id
 #   - describe_reserved_cache_nodes({})
 #     - id: reserved_cache_nodes.reserved_cache_node_id
-#   - describe_reserved_cache_nodes_offerings({})
-#     - id: reserved_cache_nodes_offerings.reserved_cache_nodes_offering_id
+#   - describe_reserved_cache_nodes_offerings <- SKIPPING due to @global_ignorables
 #   - list_allowed_node_type_modifications({})
 # ElasticBeanstalk
 #   - describe_events({})
@@ -771,15 +768,15 @@
 #   - describe_stacks({})
 #     - id: stacks.service_role_arn
 #   - describe_elastic_load_balancers({})
+#   - describe_raid_arrays({})
 #   - describe_service_errors({})
 #     - id: service_errors.stack_id
 #   - describe_permissions({})
-#   - describe_raid_arrays({})
 #   - describe_instances({})
 #   - describe_user_profiles({})
 #     - id: user_profiles.iam_user_arn
-#   - describe_stack_provisioning_parameters({})
 #   - describe_rds_db_instances({})
+#   - describe_stack_provisioning_parameters({})
 #   - describe_volumes({})
 # OpsWorksCM
 #   - describe_account_attributes({})
@@ -855,8 +852,7 @@
 #     - id: pending_maintenance_actions.pending_maintenance_action_details
 #   - describe_reserved_db_instances({})
 #     - id: reserved_db_instances.reserved_db_instance_arn
-#   - describe_reserved_db_instances_offerings({})
-#     - id: reserved_db_instances_offerings.reserved_db_instances_offering_id
+#   - describe_reserved_db_instances_offerings <- SKIPPING due to @global_ignorables
 #   - describe_source_regions({})
 #     - id: source_regions.region_name
 # Redshift
@@ -886,8 +882,7 @@
 #   - describe_logging_status({})
 #   - describe_orderable_cluster_options({})
 #     - id: orderable_cluster_options.cluster_version
-#   - describe_reserved_node_offerings({})
-#     - id: reserved_node_offerings.reserved_node_offering_id
+#   - describe_reserved_node_offerings <- SKIPPING due to @global_ignorables
 #   - describe_reserved_nodes({})
 #     - id: reserved_nodes.reserved_node_id
 #   - describe_snapshot_copy_grants({})
@@ -3036,23 +3031,6 @@ coreo_aws_rule "ec2-inventory-reserved-instances-modifications" do
   id_map ["object.reserved_instances_modifications.reserved_instances_modification_id"]
   
 end
-coreo_aws_rule "ec2-inventory-reserved-instances-offerings" do
-  service :EC2
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "EC2 Reserved Instances Offerings Inventory"
-  description "This rule performs an inventory on the EC2 service using the describe_reserved_instances_offerings function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_reserved_instances_offerings"]
-  audit_objects ["object.reserved_instances_offerings.reserved_instances_offering_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.reserved_instances_offerings.reserved_instances_offering_id"]
-  
-end
 coreo_aws_rule "ec2-inventory-route-tables" do
   service :EC2
   action :define
@@ -3329,7 +3307,7 @@ end
 coreo_aws_rule_runner "ec2-inventory-runner" do
   action :run
   service :EC2
-  rules ["ec2-inventory-account-attributes", "ec2-inventory-addresses", "ec2-inventory-availability-zones", "ec2-inventory-bundle-tasks", "ec2-inventory-classic-link-instances", "ec2-inventory-conversion-tasks", "ec2-inventory-customer-gateways", "ec2-inventory-dhcp-options", "ec2-inventory-egress-only-internet-gateways", "ec2-inventory-export-tasks", "ec2-inventory-flow-logs", "ec2-inventory-host-reservations", "ec2-inventory-hosts", "ec2-inventory-iam-instance-profile-associations", "ec2-inventory-import-image-tasks", "ec2-inventory-import-snapshot-tasks", "ec2-inventory-instance-status", "ec2-inventory-instances", "ec2-inventory-internet-gateways", "ec2-inventory-key-pairs", "ec2-inventory-moving-addresses", "ec2-inventory-nat-gateways", "ec2-inventory-network-acls", "ec2-inventory-network-interfaces", "ec2-inventory-placement-groups", "ec2-inventory-prefix-lists", "ec2-inventory-reserved-instances", "ec2-inventory-reserved-instances-modifications", "ec2-inventory-reserved-instances-offerings", "ec2-inventory-route-tables", "ec2-inventory-scheduled-instances", "ec2-inventory-security-groups", "ec2-inventory-spot-fleet-requests", "ec2-inventory-spot-instance-requests", "ec2-inventory-subnets", "ec2-inventory-volume-status", "ec2-inventory-volumes", "ec2-inventory-volumes-modifications", "ec2-inventory-vpc-endpoint-services", "ec2-inventory-vpc-endpoints", "ec2-inventory-vpc-peering-connections", "ec2-inventory-vpcs", "ec2-inventory-vpn-connections", "ec2-inventory-vpn-gateways", "ec2-inventory-regions"]
+  rules ["ec2-inventory-account-attributes", "ec2-inventory-addresses", "ec2-inventory-availability-zones", "ec2-inventory-bundle-tasks", "ec2-inventory-classic-link-instances", "ec2-inventory-conversion-tasks", "ec2-inventory-customer-gateways", "ec2-inventory-dhcp-options", "ec2-inventory-egress-only-internet-gateways", "ec2-inventory-export-tasks", "ec2-inventory-flow-logs", "ec2-inventory-host-reservations", "ec2-inventory-hosts", "ec2-inventory-iam-instance-profile-associations", "ec2-inventory-import-image-tasks", "ec2-inventory-import-snapshot-tasks", "ec2-inventory-instance-status", "ec2-inventory-instances", "ec2-inventory-internet-gateways", "ec2-inventory-key-pairs", "ec2-inventory-moving-addresses", "ec2-inventory-nat-gateways", "ec2-inventory-network-acls", "ec2-inventory-network-interfaces", "ec2-inventory-placement-groups", "ec2-inventory-prefix-lists", "ec2-inventory-reserved-instances", "ec2-inventory-reserved-instances-modifications", "ec2-inventory-route-tables", "ec2-inventory-scheduled-instances", "ec2-inventory-security-groups", "ec2-inventory-spot-fleet-requests", "ec2-inventory-spot-instance-requests", "ec2-inventory-subnets", "ec2-inventory-volume-status", "ec2-inventory-volumes", "ec2-inventory-volumes-modifications", "ec2-inventory-vpc-endpoint-services", "ec2-inventory-vpc-endpoints", "ec2-inventory-vpc-peering-connections", "ec2-inventory-vpcs", "ec2-inventory-vpn-connections", "ec2-inventory-vpn-gateways", "ec2-inventory-regions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "ecr-inventory-repositories" do
@@ -3632,28 +3610,11 @@ coreo_aws_rule "elasticache-inventory-reserved-cache-nodes" do
   id_map ["object.reserved_cache_nodes.reserved_cache_node_id"]
   
 end
-coreo_aws_rule "elasticache-inventory-reserved-cache-nodes-offerings" do
-  service :ElastiCache
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "ElastiCache Reserved Cache Nodes Offerings Inventory"
-  description "This rule performs an inventory on the ElastiCache service using the describe_reserved_cache_nodes_offerings function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_reserved_cache_nodes_offerings"]
-  audit_objects ["object.reserved_cache_nodes_offerings.reserved_cache_nodes_offering_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.reserved_cache_nodes_offerings.reserved_cache_nodes_offering_id"]
-  
-end
   
 coreo_aws_rule_runner "elasticache-inventory-runner" do
   action :run
   service :ElastiCache
-  rules ["elasticache-inventory-snapshots", "elasticache-inventory-cache-clusters", "elasticache-inventory-cache-engine-versions", "elasticache-inventory-cache-parameter-groups", "elasticache-inventory-cache-subnet-groups", "elasticache-inventory-events", "elasticache-inventory-replication-groups", "elasticache-inventory-reserved-cache-nodes", "elasticache-inventory-reserved-cache-nodes-offerings"]
+  rules ["elasticache-inventory-snapshots", "elasticache-inventory-cache-clusters", "elasticache-inventory-cache-engine-versions", "elasticache-inventory-cache-parameter-groups", "elasticache-inventory-cache-subnet-groups", "elasticache-inventory-events", "elasticache-inventory-replication-groups", "elasticache-inventory-reserved-cache-nodes"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "elasticbeanstalk-inventory-events" do
@@ -5636,23 +5597,6 @@ coreo_aws_rule "rds-inventory-reserved-db-instances" do
   id_map ["object.reserved_db_instances.reserved_db_instance_arn"]
   
 end
-coreo_aws_rule "rds-inventory-reserved-db-instances-offerings" do
-  service :RDS
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "RDS Reserved Db Instances Offerings Inventory"
-  description "This rule performs an inventory on the RDS service using the describe_reserved_db_instances_offerings function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_reserved_db_instances_offerings"]
-  audit_objects ["object.reserved_db_instances_offerings.reserved_db_instances_offering_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.reserved_db_instances_offerings.reserved_db_instances_offering_id"]
-  
-end
 coreo_aws_rule "rds-inventory-source-regions" do
   service :RDS
   action :define
@@ -5674,7 +5618,7 @@ end
 coreo_aws_rule_runner "rds-inventory-runner" do
   action :run
   service :RDS
-  rules ["rds-inventory-events", "rds-inventory-certificates", "rds-inventory-account-attributes", "rds-inventory-db-clusters", "rds-inventory-db-cluster-parameter-groups", "rds-inventory-db-instances", "rds-inventory-db-engine-versions", "rds-inventory-db-cluster-snapshots", "rds-inventory-db-parameter-groups", "rds-inventory-db-security-groups", "rds-inventory-db-snapshots", "rds-inventory-db-subnet-groups", "rds-inventory-event-categories", "rds-inventory-event-subscriptions", "rds-inventory-option-groups", "rds-inventory-pending-maintenance-actions", "rds-inventory-reserved-db-instances", "rds-inventory-reserved-db-instances-offerings", "rds-inventory-source-regions"]
+  rules ["rds-inventory-events", "rds-inventory-certificates", "rds-inventory-account-attributes", "rds-inventory-db-clusters", "rds-inventory-db-cluster-parameter-groups", "rds-inventory-db-instances", "rds-inventory-db-engine-versions", "rds-inventory-db-cluster-snapshots", "rds-inventory-db-parameter-groups", "rds-inventory-db-security-groups", "rds-inventory-db-snapshots", "rds-inventory-db-subnet-groups", "rds-inventory-event-categories", "rds-inventory-event-subscriptions", "rds-inventory-option-groups", "rds-inventory-pending-maintenance-actions", "rds-inventory-reserved-db-instances", "rds-inventory-source-regions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "redshift-inventory-clusters" do
@@ -5864,23 +5808,6 @@ coreo_aws_rule "redshift-inventory-orderable-cluster-options" do
   id_map ["object.orderable_cluster_options.cluster_version"]
   
 end
-coreo_aws_rule "redshift-inventory-reserved-node-offerings" do
-  service :Redshift
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "Redshift Reserved Node Offerings Inventory"
-  description "This rule performs an inventory on the Redshift service using the describe_reserved_node_offerings function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_reserved_node_offerings"]
-  audit_objects ["object.reserved_node_offerings.reserved_node_offering_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.reserved_node_offerings.reserved_node_offering_id"]
-  
-end
 coreo_aws_rule "redshift-inventory-reserved-nodes" do
   service :Redshift
   action :define
@@ -5919,7 +5846,7 @@ end
 coreo_aws_rule_runner "redshift-inventory-runner" do
   action :run
   service :Redshift
-  rules ["redshift-inventory-clusters", "redshift-inventory-events", "redshift-inventory-event-categories", "redshift-inventory-event-subscriptions", "redshift-inventory-cluster-parameter-groups", "redshift-inventory-cluster-snapshots", "redshift-inventory-cluster-subnet-groups", "redshift-inventory-cluster-versions", "redshift-inventory-hsm-client-certificates", "redshift-inventory-hsm-configurations", "redshift-inventory-orderable-cluster-options", "redshift-inventory-reserved-node-offerings", "redshift-inventory-reserved-nodes", "redshift-inventory-snapshot-copy-grants"]
+  rules ["redshift-inventory-clusters", "redshift-inventory-events", "redshift-inventory-event-categories", "redshift-inventory-event-subscriptions", "redshift-inventory-cluster-parameter-groups", "redshift-inventory-cluster-snapshots", "redshift-inventory-cluster-subnet-groups", "redshift-inventory-cluster-versions", "redshift-inventory-hsm-client-certificates", "redshift-inventory-hsm-configurations", "redshift-inventory-orderable-cluster-options", "redshift-inventory-reserved-nodes", "redshift-inventory-snapshot-copy-grants"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "rekognition-inventory-collections" do

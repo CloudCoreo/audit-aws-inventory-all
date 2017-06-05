@@ -4,9 +4,10 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
-# @specify_services = ["Route53"]
+# @specify_services = ["RDS", "SSM"]
 
 @yaml_doc = { 'variables' => {} }
+@global_ignorables = Regexp.union( /offerings$/ )
 @modified_methods = {
   :EC2 => [{ :describe_images => { owners: ["self"] } }, { :describe_snapshots => { owner_ids: ["self"] } }]
 }
@@ -23,7 +24,9 @@ require 'yaml'
   :CodeBuild => ["list_curated_environment_images"],
   :CloudHSM => ["list_available_zones"],
   :CloudFormation => ["describe_account_limits"],
-  :AutoScaling => ["describe_scaling_activities", "describe_adjustment_types", "describe_auto_scaling_notification_types", "describe_lifecycle_hook_types", "describe_metric_collection_types", "describe_scaling_process_types", "describe_termination_policy_types"]
+  :AutoScaling => ["describe_scaling_activities", "describe_adjustment_types", "describe_auto_scaling_notification_types", "describe_lifecycle_hook_types", "describe_metric_collection_types", "describe_scaling_process_types", "describe_termination_policy_types"],
+  :EC2 => ["describe_reserved_instances_offerings"],
+  :RDS => ["describe_reserved_db_instances_offerings"]
 
 }
 
@@ -153,6 +156,10 @@ Aws.partition('aws').services.each do |s|
 
   ## if it doesnt require and argument, it is an inventory method
   relevant_methods.each { |r|
+    if @global_ignorables =~ r.to_s
+      writeLine "#   - #{r} <- SKIPPING due to @global_ignorables"
+      next
+    end
     if @useless_methods[s.name.to_sym] && @useless_methods[s.name.to_sym].include?(r.to_s)
       writeLine "#   - #{r} <- SKIPPING due to @useless_methods"
       next
