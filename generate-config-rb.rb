@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
-@specify_services = ["Route53"]
+# @specify_services = ["Route53"]
 
 @global_ignorables = Regexp.union( /offerings$/ )
 
@@ -17,7 +17,7 @@ require 'yaml'
   :Route53 => ["list_health_checks", "get_checker_ip_ranges", "list_hosted_zones", "list_geo_locations"],
   :SSM => ["describe_available_patches", "describe_patch_baselines", "list_documents"]
 }
-#"list_traffic_policy_instances","list_traffic_policies",, "list_reusable_delegation_sets"
+
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
   :DatabaseMigrationService => ["describe_account_attributes", "describe_endpoint_types"],
