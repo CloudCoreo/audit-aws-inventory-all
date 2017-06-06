@@ -75,10 +75,10 @@
 # Rekognition
 # ResourceGroupsTaggingAPI
 # Route53
-#   - get_checker_ip_ranges({})
-#     - id: checker_ip_ranges
+#   - get_checker_ip_ranges <- SKIPPING due to @engine_bug_exclusions
 #   - get_health_check_status({})
-#   - list_geo_locations <- SKIPPING due to @engine_bug_exclusions
+#   - list_geo_locations({})
+#     - id: geo_location_details_list.subdivision_name
 #   - list_health_checks <- SKIPPING due to @engine_bug_exclusions
 #   - list_hosted_zones <- SKIPPING due to @engine_bug_exclusions
 #   - list_resource_record_sets({})
@@ -110,21 +110,21 @@
 # WorkDocs
 # WorkSpaces
 # XRay
-coreo_aws_rule "route53-inventory-checker-ip-ranges" do
+coreo_aws_rule "route53-inventory-geo-locations" do
   service :Route53
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
-  display_name "Route53 Checker Ip Ranges Inventory"
-  description "This rule performs an inventory on the Route53 service using the get_checker_ip_ranges function"
+  display_name "Route53 Geo Locations Inventory"
+  description "This rule performs an inventory on the Route53 service using the list_geo_locations function"
   category "Inventory"
   suggested_action "None."
   level "Informational"
-  objectives ["get_checker_ip_ranges"]
-  audit_objects ["object.checker_ip_ranges"]
+  objectives ["list_geo_locations"]
+  audit_objects ["object.geo_location_details_list.subdivision_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.checker_ip_ranges"]
+  id_map ["object.geo_location_details_list.subdivision_name"]
   
 end
 coreo_aws_rule "route53-inventory-traffic-policies" do
@@ -165,6 +165,6 @@ end
 coreo_aws_rule_runner "route53-inventory-runner" do
   action :run
   service :Route53
-  rules ["route53-inventory-checker-ip-ranges", "route53-inventory-traffic-policies", "route53-inventory-traffic-policy-instances"]
+  rules ["route53-inventory-geo-locations", "route53-inventory-traffic-policies", "route53-inventory-traffic-policy-instances"]
   regions ['us-east-1']
 end

@@ -14,10 +14,10 @@ require 'yaml'
 @engine_bug_exclusions = {
   :EC2 => ["describe_images", "describe_snapshots"],
   :CloudTrail => ["list_public_keys"],
-  :Route53 => ["list_health_checks", "list_hosted_zones", "list_geo_locations", "list_reusable_delegation_sets"],
+  :Route53 => ["list_health_checks", "get_checker_ip_ranges", "list_hosted_zones", "list_reusable_delegation_sets"],
   :SSM => ["describe_available_patches", "describe_patch_baselines", "list_documents"]
 }
-#"list_traffic_policy_instances","list_traffic_policies","get_checker_ip_ranges",
+#"list_traffic_policy_instances","list_traffic_policies","list_geo_locations",
 @useless_methods = {
   :CodePipeline => ["list_action_types"],
   :DatabaseMigrationService => ["describe_account_attributes", "describe_endpoint_types"],
