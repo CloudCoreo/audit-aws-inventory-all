@@ -75,12 +75,12 @@
 # Rekognition
 # ResourceGroupsTaggingAPI
 # Route53
-#   - get_checker_ip_ranges <- SKIPPING due to @engine_bug_exclusions
+#   - get_checker_ip_ranges({})
+#     - id: checker_ip_ranges
 #   - get_health_check_status({})
 #   - list_geo_locations <- SKIPPING due to @engine_bug_exclusions
 #   - list_health_checks <- SKIPPING due to @engine_bug_exclusions
-#   - list_hosted_zones({})
-#     - id: hosted_zones.id
+#   - list_hosted_zones <- SKIPPING due to @engine_bug_exclusions
 #   - list_resource_record_sets({})
 #   - list_reusable_delegation_sets <- SKIPPING due to @engine_bug_exclusions
 #   - list_traffic_policies({})
@@ -110,21 +110,21 @@
 # WorkDocs
 # WorkSpaces
 # XRay
-coreo_aws_rule "route53-inventory-hosted-zones" do
+coreo_aws_rule "route53-inventory-checker-ip-ranges" do
   service :Route53
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
-  display_name "Route53 Hosted Zones Inventory"
-  description "This rule performs an inventory on the Route53 service using the list_hosted_zones function"
+  display_name "Route53 Checker Ip Ranges Inventory"
+  description "This rule performs an inventory on the Route53 service using the get_checker_ip_ranges function"
   category "Inventory"
   suggested_action "None."
   level "Informational"
-  objectives ["list_hosted_zones"]
-  audit_objects ["object.hosted_zones.id"]
+  objectives ["get_checker_ip_ranges"]
+  audit_objects ["object.checker_ip_ranges"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.hosted_zones.id"]
+  id_map ["object.checker_ip_ranges"]
   
 end
 coreo_aws_rule "route53-inventory-traffic-policies" do
@@ -165,6 +165,6 @@ end
 coreo_aws_rule_runner "route53-inventory-runner" do
   action :run
   service :Route53
-  rules ["route53-inventory-hosted-zones", "route53-inventory-traffic-policies", "route53-inventory-traffic-policy-instances"]
+  rules ["route53-inventory-checker-ip-ranges", "route53-inventory-traffic-policies", "route53-inventory-traffic-policy-instances"]
   regions ['us-east-1']
 end
