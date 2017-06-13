@@ -1,13 +1,14 @@
-audit Inventory
+audit Inventory All
 ============================
-This composite performs inventory on your AWS cloud objects
+This composite performs complete inventory on your AWS cloud objects
 
 
 ## Description
-This composite scans AWS services and reports on the inventory of objects found
+This composite scans all AWS services and reports on the inventory of objects found
+
 
 ## Hierarchy
-![composite inheritance hierarchy](https://raw.githubusercontent.com/CloudCoreo/audit-aws-inventory/master/images/hierarchy.png "composite inheritance hierarchy")
+![composite inheritance hierarchy](https://raw.githubusercontent.com/CloudCoreo/audit-aws-inventory-all/master/images/hierarchy.png "composite inheritance hierarchy")
 
 
 
@@ -54,9 +55,10 @@ This composite scans AWS services and reports on the inventory of objects found
 
 
 ## Diagram
-![diagram](https://raw.githubusercontent.com/CloudCoreo/audit-aws-inventory/master/images/diagram.png "diagram")
+![diagram](https://raw.githubusercontent.com/CloudCoreo/audit-aws-inventory-all/master/images/diagram.png "diagram")
 
 
 ## Icon
-![icon](https://raw.githubusercontent.com/CloudCoreo/audit-aws-inventory/master/images/icon.png "icon")
+![icon](https://raw.githubusercontent.com/CloudCoreo/audit-aws-inventory-all/master/images/icon.png "icon")
+
 
