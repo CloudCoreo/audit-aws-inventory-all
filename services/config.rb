@@ -3,7 +3,7 @@
 #     - id: certificate_summary_list.certificate_arn
 # APIGateway
 #   - get_api_keys({})
-#     - id: items.id
+#     - id: warnings
 #   - get_authorizers({})
 #   - get_base_path_mappings({})
 #   - get_client_certificates({})
@@ -19,7 +19,7 @@
 #   - get_rest_apis({})
 #     - id: items.id
 #   - get_sdk_types({})
-#     - id: items.id
+#     - id: items.friendly_name
 #   - get_stages({})
 #   - get_usage_plan_keys({})
 #   - get_usage_plans({})
@@ -28,7 +28,7 @@
 #   - describe_images({})
 #     - id: images.arn
 #   - describe_fleets({})
-#     - id: fleets.arn
+#     - id: fleets.display_name
 #   - describe_sessions({})
 #   - describe_stacks({})
 #     - id: stacks.arn
@@ -52,12 +52,12 @@
 #     - id: NA
 #   - describe_adjustment_types <- SKIPPING due to @useless_methods
 #   - describe_auto_scaling_groups({})
-#     - id: auto_scaling_groups.auto_scaling_group_arn
+#     - id: auto_scaling_groups.auto_scaling_group_name
 #   - describe_auto_scaling_instances({})
 #     - id: auto_scaling_instances.instance_id
 #   - describe_auto_scaling_notification_types <- SKIPPING due to @useless_methods
 #   - describe_launch_configurations({})
-#     - id: launch_configurations.launch_configuration_arn
+#     - id: launch_configurations.image_id
 #   - describe_lifecycle_hook_types <- SKIPPING due to @useless_methods
 #   - describe_lifecycle_hooks({})
 #   - describe_load_balancer_target_groups({})
@@ -66,7 +66,7 @@
 #   - describe_notification_configurations({})
 #     - id: notification_configurations.topic_arn
 #   - describe_policies({})
-#     - id: scaling_policies.policy_arn
+#     - id: scaling_policies.auto_scaling_group_name
 #   - describe_scaling_process_types <- SKIPPING due to @useless_methods
 #   - describe_scheduled_actions({})
 #     - id: scheduled_update_group_actions.scheduled_action_arn
@@ -116,10 +116,10 @@
 #   - list_cloud_front_origin_access_identities({})
 #     - id: cloud_front_origin_access_identity_list.items.id
 #   - list_distributions({})
-#     - id: distribution_list.items.arn
+#     - id: distribution_list.items.id
 #   - list_invalidations({})
 #   - list_streaming_distributions({})
-#     - id: streaming_distribution_list.items.arn
+#     - id: streaming_distribution_list.items.domain_name
 # CloudHSM
 #   - list_available_zones <- SKIPPING due to @useless_methods
 #   - list_hapgs({})
@@ -143,7 +143,7 @@
 # CloudSearchDomain
 # CloudTrail
 #   - describe_trails({})
-#     - id: trail_list.trail_arn
+#     - id: trail_list.kms_key_id
 #   - get_event_selectors({})
 #   - get_trail_status({})
 #   - list_public_keys <- SKIPPING due to @engine_bug_exclusions
@@ -155,14 +155,14 @@
 #     - id: metrics.metric_name
 # CloudWatchEvents
 #   - list_rules({})
-#     - id: rules.role_arn
+#     - id: rules.arn
 #   - put_targets({})
 #   - remove_targets({})
 # CloudWatchLogs
 #   - describe_export_tasks({})
 #     - id: export_tasks.task_id
 #   - describe_destinations({})
-#     - id: destinations.role_arn
+#     - id: destinations.destination_name
 #   - describe_log_groups({})
 #     - id: log_groups.arn
 #   - describe_log_streams({})
@@ -236,9 +236,9 @@
 #   - describe_config_rule_evaluation_status({})
 #     - id: config_rules_evaluation_status.config_rule_arn
 #   - describe_config_rules({})
-#     - id: config_rules.config_rule_arn
+#     - id: config_rules.config_rule_name
 #   - describe_configuration_recorder_status({})
-#     - id: configuration_recorders_status.last_status_change_time
+#     - id: configuration_recorders_status.name
 #   - describe_configuration_recorders({})
 #     - id: configuration_recorders.role_arn
 #   - describe_delivery_channel_status({})
@@ -258,15 +258,15 @@
 #   - describe_certificates({})
 #     - id: certificates.certificate_arn
 #   - describe_connections({})
-#     - id: connections.endpoint_arn
+#     - id: connections.replication_instance_arn
 #   - describe_endpoint_types <- SKIPPING due to @useless_methods
 #   - describe_endpoints({})
-#     - id: endpoints.endpoint_arn
+#     - id: endpoints.kms_key_id
 #   - describe_orderable_replication_instances({})
-#     - id: orderable_replication_instances.min_allocated_storage
+#     - id: orderable_replication_instances.engine_version
 #   - describe_refresh_schemas_status({})
 #   - describe_replication_instances({})
-#     - id: replication_instances.replication_instance_arn
+#     - id: replication_instances.replication_instance_identifier
 #   - describe_replication_subnet_groups({})
 #     - id: replication_subnet_groups.vpc_id
 #   - describe_replication_tasks({})
@@ -294,11 +294,11 @@
 #   - list_uploads({})
 # DirectConnect
 #   - describe_connections({})
-#     - id: connections.lag_id
+#     - id: connections.connection_id
 #   - describe_hosted_connections({})
 #   - describe_interconnects({})
 #   - describe_lags({})
-#     - id: lags.lag_id
+#     - id: lags.lag_name
 #   - describe_locations <- SKIPPING due to @useless_methods
 #   - describe_virtual_gateways({})
 #     - id: virtual_gateways.virtual_gateway_id
@@ -306,14 +306,14 @@
 #     - id: virtual_interfaces.virtual_interface_id
 # DirectoryService
 #   - describe_snapshots({})
-#     - id: snapshots.snapshot_id
+#     - id: snapshots.directory_id
 #   - describe_conditional_forwarders({})
 #   - describe_directories({})
-#     - id: directory_descriptions.directory_id
+#     - id: directory_descriptions.short_name
 #   - describe_event_topics({})
 #     - id: event_topics.topic_arn
 #   - describe_trusts({})
-#     - id: trusts.trust_id
+#     - id: trusts.directory_id
 #   - get_directory_limits({})
 #     - id: NA
 #   - get_snapshot_limits({})
@@ -329,18 +329,12 @@
 #   - list_streams({})
 #     - id: last_evaluated_stream_arn
 # EC2
-#   - describe_account_attributes({})
-#     - id: account_attributes.attribute_name
-#   - describe_addresses({})
-#     - id: addresses.allocation_id
-#   - describe_availability_zones({})
-#     - id: availability_zones.region_name
-#   - describe_bundle_tasks({})
-#     - id: bundle_tasks.bundle_id
+#   - describe_account_attributes <- SKIPPING due to @useless_methods
+#   - describe_availability_zones <- SKIPPING due to @useless_methods
 #   - describe_classic_link_instances({})
 #     - id: instances.instance_id
 #   - describe_conversion_tasks({})
-#     - id: conversion_tasks.import_volume.volume.id
+#     - id: conversion_tasks.conversion_task_id
 #   - describe_customer_gateways({})
 #     - id: customer_gateways.customer_gateway_id
 #   - describe_dhcp_options({})
@@ -353,11 +347,11 @@
 #     - id: flow_logs.deliver_logs_permission_arn
 #   - describe_host_reservation_offerings <- SKIPPING due to @global_ignorables
 #   - describe_host_reservations({})
-#     - id: host_reservation_set.offering_id
+#     - id: host_reservation_set.host_reservation_id
 #   - describe_hosts({})
 #     - id: hosts.host_id
 #   - describe_iam_instance_profile_associations({})
-#     - id: iam_instance_profile_associations.iam_instance_profile.arn
+#     - id: iam_instance_profile_associations.association_id
 #   - describe_import_image_tasks({})
 #     - id: import_image_tasks.import_task_id
 #   - describe_import_snapshot_tasks({})
@@ -365,7 +359,7 @@
 #   - describe_instance_status({})
 #     - id: instance_statuses.instance_id
 #   - describe_instances({})
-#     - id: reservations.instances.iam_instance_profile.arn
+#     - id: reservations.reservation_id
 #   - describe_internet_gateways({})
 #     - id: internet_gateways.internet_gateway_id
 #   - describe_key_pairs({})
@@ -373,11 +367,11 @@
 #   - describe_moving_addresses({})
 #     - id: moving_address_statuses.public_ip
 #   - describe_nat_gateways({})
-#     - id: nat_gateways.subnet_id
+#     - id: nat_gateways.vpc_id
 #   - describe_network_acls({})
-#     - id: network_acls.vpc_id
+#     - id: network_acls.network_acl_id
 #   - describe_network_interfaces({})
-#     - id: network_interfaces.subnet_id
+#     - id: network_interfaces.network_interface_id
 #   - describe_placement_groups({})
 #     - id: placement_groups.group_name
 #   - describe_prefix_lists({})
@@ -394,15 +388,15 @@
 #     - id: scheduled_instance_set.scheduled_instance_id
 #   - describe_security_group_references({})
 #   - describe_security_groups({})
-#     - id: security_groups.group_id
+#     - id: security_groups.owner_id
 #   - describe_spot_fleet_instances({})
 #   - describe_spot_fleet_requests({})
-#     - id: spot_fleet_request_configs.spot_fleet_request_config.launch_specifications.iam_instance_profile.arn
+#     - id: spot_fleet_request_configs.spot_fleet_request_id
 #   - describe_spot_instance_requests({})
-#     - id: spot_instance_requests.launch_specification.iam_instance_profile.arn
+#     - id: spot_instance_requests.spot_instance_request_id
 #   - describe_stale_security_groups({})
 #   - describe_subnets({})
-#     - id: subnets.vpc_id
+#     - id: subnets.subnet_id
 #   - describe_volume_status({})
 #     - id: volume_statuses.volume_id
 #   - describe_volumes({})
@@ -412,17 +406,21 @@
 #   - describe_vpc_endpoint_services({})
 #     - id: service_names
 #   - describe_vpc_endpoints({})
-#     - id: vpc_endpoints.vpc_id
+#     - id: vpc_endpoints.vpc_endpoint_id
 #   - describe_vpc_peering_connections({})
 #     - id: vpc_peering_connections.vpc_peering_connection_id
 #   - describe_vpcs({})
 #     - id: vpcs.vpc_id
 #   - describe_vpn_connections({})
-#     - id: vpn_connections.vpn_gateway_id
+#     - id: vpn_connections.vpn_connection_id
 #   - describe_vpn_gateways({})
 #     - id: vpn_gateways.vpn_gateway_id
 #   - describe_images <- SKIPPING due to @engine_bug_exclusions
 #   - describe_snapshots <- SKIPPING due to @engine_bug_exclusions
+#   - describe_addresses({})
+#     - id: addresses.allocation_id
+#   - describe_bundle_tasks({})
+#     - id: bundle_tasks.bundle_id
 #   - describe_regions({})
 #     - id: regions.region_name
 # ECR
@@ -432,7 +430,7 @@
 #   - list_images({})
 # ECS
 #   - describe_clusters({})
-#     - id: failures.arn
+#     - id: clusters.cluster_arn
 #   - describe_container_instances({})
 #   - describe_services({})
 #   - describe_tasks({})
@@ -448,7 +446,7 @@
 #   - list_tasks({})
 # EFS
 #   - describe_file_systems({})
-#     - id: file_systems.file_system_id
+#     - id: file_systems.owner_id
 #   - describe_mount_target_security_groups({})
 #   - describe_mount_targets({})
 #   - modify_mount_target_security_groups({})
@@ -467,7 +465,7 @@
 #   - describe_snapshots({})
 #     - id: snapshots.topic_arn
 #   - describe_cache_clusters({})
-#     - id: cache_clusters.notification_configuration.topic_arn
+#     - id: cache_clusters.cache_cluster_id
 #   - describe_cache_engine_versions({})
 #     - id: cache_engine_versions.engine
 #   - describe_cache_parameter_groups({})
@@ -500,12 +498,12 @@
 #   - describe_environments({})
 #     - id: environments.platform_arn
 #   - list_available_solution_stacks({})
-#     - id: solution_stack_details.solution_stack_name
+#     - id: solution_stacks
 #   - list_platform_versions({})
 #     - id: platform_summary_list.platform_arn
 # ElasticLoadBalancing
 #   - describe_load_balancers({})
-#     - id: load_balancer_descriptions.vpc_id
+#     - id: load_balancer_descriptions.load_balancer_name
 #   - create_load_balancer_listeners({})
 #   - delete_load_balancer_listeners({})
 #   - describe_load_balancer_attributes({})
@@ -515,7 +513,7 @@
 #     - id: policy_type_descriptions.policy_type_name
 # ElasticLoadBalancingV2
 #   - describe_load_balancers({})
-#     - id: load_balancers.load_balancer_arn
+#     - id: load_balancers.dns_name
 #   - describe_load_balancer_attributes({})
 #   - deregister_targets({})
 #   - describe_listeners({})
@@ -529,7 +527,7 @@
 #   - register_targets({})
 # ElasticTranscoder
 #   - list_pipelines({})
-#     - id: pipelines.aws_kms_key_arn
+#     - id: pipelines.arn
 #   - list_jobs_by_status({})
 #   - list_presets({})
 #     - id: presets.arn
@@ -563,7 +561,7 @@
 #   - describe_player_sessions({})
 #   - get_instance_access({})
 #   - list_aliases({})
-#     - id: aliases.alias_arn
+#     - id: aliases.alias_id
 #   - list_fleets({})
 #     - id: fleet_ids
 # Glacier
@@ -582,7 +580,7 @@
 #   - describe_event_types({})
 # IAM
 #   - get_account_authorization_details({})
-#     - id: user_detail_list.arn
+#     - id: user_detail_list.path
 #   - list_access_keys({})
 #     - id: access_key_metadata.access_key_id
 #   - list_account_aliases({})
@@ -593,7 +591,7 @@
 #   - list_groups({})
 #     - id: groups.arn
 #   - list_instance_profiles({})
-#     - id: instance_profiles.arn
+#     - id: instance_profiles.path
 #   - list_group_policies({})
 #   - list_policies({})
 #     - id: policies.arn
@@ -617,7 +615,7 @@
 #   - list_service_specific_credentials({})
 #     - id: service_specific_credentials.service_specific_credential_id
 #   - list_virtual_mfa_devices({})
-#     - id: virtual_mfa_devices.user.arn
+#     - id: virtual_mfa_devices.serial_number
 #   - list_users({})
 #     - id: users.arn
 # ImportExport
@@ -639,7 +637,7 @@
 #   - list_assessment_templates({})
 #     - id: assessment_template_arns
 #   - list_event_subscriptions({})
-#     - id: subscriptions.topic_arn
+#     - id: subscriptions.resource_arn
 #   - list_findings({})
 #     - id: finding_arns
 #   - list_rules_packages({})
@@ -662,7 +660,7 @@
 #   - list_thing_types({})
 #     - id: thing_types.thing_type_name
 #   - list_things({})
-#     - id: things.thing_type_name
+#     - id: things.thing_name
 #   - list_topic_rules({})
 #     - id: rules.rule_arn
 # IoTDataPlane
@@ -690,7 +688,7 @@
 #   - list_aliases({})
 #   - get_alias({})
 #   - list_event_source_mappings({})
-#     - id: event_source_mappings.function_arn
+#     - id: event_source_mappings.event_source_arn
 #   - list_functions({})
 #     - id: functions.function_arn
 # LambdaPreview
@@ -726,7 +724,7 @@
 #   - get_bundles({})
 #     - id: bundles.bundle_id
 #   - get_domains({})
-#     - id: domains.arn
+#     - id: domains.name
 #   - get_instance_access_details({})
 #   - get_instance_port_states({})
 #   - get_instance_snapshots({})
@@ -736,7 +734,7 @@
 #   - get_key_pairs({})
 #     - id: key_pairs.arn
 #   - get_operations({})
-#     - id: operations.id
+#     - id: operations.resource_name
 #   - get_static_ips({})
 #     - id: static_ips.arn
 # MTurk
@@ -748,11 +746,11 @@
 #   - list_worker_blocks({})
 # MachineLearning
 #   - describe_batch_predictions({})
-#     - id: results.ml_model_id
+#     - id: results.batch_prediction_id
 #   - describe_data_sources({})
-#     - id: results.role_arn
+#     - id: results.data_source_id
 #   - describe_evaluations({})
-#     - id: results.ml_model_id
+#     - id: results.evaluation_id
 #   - describe_ml_models({})
 #     - id: results.ml_model_id
 # MarketplaceCommerceAnalytics
@@ -766,24 +764,24 @@
 #   - describe_elastic_ips({})
 #   - describe_layers({})
 #   - describe_stacks({})
-#     - id: stacks.service_role_arn
+#     - id: stacks.stack_id
 #   - describe_elastic_load_balancers({})
-#   - describe_raid_arrays({})
 #   - describe_service_errors({})
-#     - id: service_errors.stack_id
+#     - id: service_errors.service_error_id
 #   - describe_permissions({})
+#   - describe_raid_arrays({})
 #   - describe_instances({})
 #   - describe_user_profiles({})
 #     - id: user_profiles.iam_user_arn
-#   - describe_rds_db_instances({})
 #   - describe_stack_provisioning_parameters({})
+#   - describe_rds_db_instances({})
 #   - describe_volumes({})
 # OpsWorksCM
 #   - describe_account_attributes({})
 #     - id: attributes.name
 #   - describe_events({})
 #   - describe_backups({})
-#     - id: backups.user_arn
+#     - id: backups.backup_arn
 #   - describe_node_association_status({})
 #   - describe_servers({})
 #     - id: servers.cloud_formation_stack_arn
@@ -807,7 +805,7 @@
 #   - describe_voices({})
 #     - id: voices.id
 #   - list_lexicons({})
-#     - id: lexicons.attributes.lexicon_arn
+#     - id: lexicons.name
 # RDS
 #   - describe_engine_default_parameters({})
 #   - describe_events({})
@@ -817,18 +815,18 @@
 #   - describe_db_log_files({})
 #   - describe_account_attributes({})
 #     - id: account_quotas.account_quota_name
-#   - describe_db_cluster_parameters({})
-#   - describe_db_clusters({})
-#     - id: db_clusters.db_cluster_arn
-#   - describe_db_cluster_snapshot_attributes({})
 #   - describe_db_cluster_parameter_groups({})
 #     - id: db_cluster_parameter_groups.db_cluster_parameter_group_arn
-#   - describe_db_instances({})
-#     - id: db_instances.tde_credential_arn
-#   - describe_db_engine_versions({})
-#     - id: db_engine_versions.default_character_set.character_set_name
 #   - describe_db_cluster_snapshots({})
-#     - id: db_cluster_snapshots.source_db_cluster_snapshot_arn
+#     - id: db_cluster_snapshots.db_cluster_snapshot_arn
+#   - describe_db_cluster_parameters({})
+#   - describe_db_engine_versions({})
+#     - id: db_engine_versions.engine
+#   - describe_db_clusters({})
+#     - id: db_clusters.allocated_storage
+#   - describe_db_cluster_snapshot_attributes({})
+#   - describe_db_instances({})
+#     - id: db_instances.db_name
 #   - describe_db_parameter_groups({})
 #     - id: db_parameter_groups.db_parameter_group_arn
 #   - describe_db_parameters({})
@@ -836,20 +834,20 @@
 #     - id: db_security_groups.db_security_group_arn
 #   - describe_db_snapshot_attributes({})
 #   - describe_db_snapshots({})
-#     - id: db_snapshots.db_snapshot_arn
+#     - id: db_snapshots.tde_credential_arn
 #   - describe_db_subnet_groups({})
 #     - id: db_subnet_groups.db_subnet_group_arn
 #   - describe_engine_default_cluster_parameters({})
 #   - describe_event_categories({})
 #     - id: event_categories_map_list.source_type
 #   - describe_event_subscriptions({})
-#     - id: event_subscriptions_list.event_subscription_arn
+#     - id: event_subscriptions_list.sns_topic_arn
 #   - describe_option_group_options({})
 #   - describe_option_groups({})
-#     - id: option_groups_list.option_group_arn
+#     - id: option_groups_list.option_group_name
 #   - describe_orderable_db_instance_options({})
 #   - describe_pending_maintenance_actions({})
-#     - id: pending_maintenance_actions.pending_maintenance_action_details
+#     - id: pending_maintenance_actions.resource_identifier
 #   - describe_reserved_db_instances({})
 #     - id: reserved_db_instances.reserved_db_instance_arn
 #   - describe_reserved_db_instances_offerings <- SKIPPING due to @global_ignorables
@@ -857,11 +855,11 @@
 #     - id: source_regions.region_name
 # Redshift
 #   - describe_clusters({})
-#     - id: clusters.iam_roles.iam_role_arn
+#     - id: clusters.cluster_identifier
 #   - describe_events({})
 #     - id: events.event_id
 #   - describe_event_categories({})
-#     - id: event_categories_map_list.events.event_id
+#     - id: event_categories_map_list.source_type
 #   - describe_event_subscriptions({})
 #     - id: event_subscriptions_list.sns_topic_arn
 #   - describe_cluster_parameter_groups({})
@@ -869,7 +867,7 @@
 #   - describe_cluster_parameters({})
 #   - describe_cluster_security_groups({})
 #   - describe_cluster_snapshots({})
-#     - id: snapshots.kms_key_id
+#     - id: snapshots.snapshot_identifier
 #   - describe_cluster_subnet_groups({})
 #     - id: cluster_subnet_groups.vpc_id
 #   - describe_cluster_versions({})
@@ -923,12 +921,12 @@
 # S3
 #   - list_multipart_uploads({})
 #   - list_parts({})
+#   - list_buckets({})
+#     - id: bucket.bucket_name
 #   - get_bucket_cors({})
 #   - list_bucket_analytics_configurations({})
 #   - list_bucket_inventory_configurations({})
 #   - list_bucket_metrics_configurations({})
-#   - list_buckets({})
-#     - id: owner.id
 #   - list_object_versions({})
 #   - list_objects({})
 # SES
@@ -952,7 +950,7 @@
 #     - id: verified_email_addresses
 # SMS
 #   - get_connectors({})
-#     - id: connector_list.vm_manager_id
+#     - id: connector_list.connector_id
 #   - get_replication_jobs({})
 #     - id: replication_job_list.replication_job_id
 #   - get_replication_runs({})
@@ -968,7 +966,7 @@
 #   - list_platform_applications({})
 #     - id: platform_applications.platform_application_arn
 #   - list_subscriptions({})
-#     - id: subscriptions.topic_arn
+#     - id: subscriptions.subscription_arn
 #   - list_topics({})
 #     - id: topics.topic_arn
 # SQS
@@ -997,14 +995,14 @@
 #     - id: parameters.key_id
 #   - describe_patch_baselines <- SKIPPING due to @engine_bug_exclusions
 #   - describe_patch_groups({})
-#     - id: mappings.baseline_identity.baseline_id
+#     - id: mappings.patch_group
 #   - get_parameters({})
 #   - list_associations({})
 #     - id: associations.instance_id
 #   - list_command_invocations({})
-#     - id: command_invocations.notification_config.notification_arn
+#     - id: command_invocations.command_id
 #   - list_commands({})
-#     - id: commands.notification_config.notification_arn
+#     - id: commands.command_id
 #   - list_document_versions({})
 #   - list_documents <- SKIPPING due to @engine_bug_exclusions
 #   - list_inventory_entries({})
@@ -1018,11 +1016,11 @@
 # ServiceCatalog
 #   - describe_provisioning_parameters({})
 #   - list_accepted_portfolio_shares({})
-#     - id: portfolio_details.arn
+#     - id: portfolio_details.id
 #   - list_launch_paths({})
 #   - list_portfolio_access({})
 #   - list_portfolios({})
-#     - id: portfolio_details.arn
+#     - id: portfolio_details.id
 #   - list_provisioning_artifacts({})
 # Shield
 #   - list_attacks({})
@@ -1063,7 +1061,7 @@
 #     - id: gateways.gateway_arn
 #   - list_local_disks({})
 #   - list_tapes({})
-#     - id: tape_infos.gateway_arn
+#     - id: tape_infos.tape_arn
 #   - list_volume_initiators({})
 #   - list_volume_recovery_points({})
 #   - list_volumes({})
@@ -1120,9 +1118,9 @@
 #   - describe_workspace_bundles({})
 #     - id: bundles.bundle_id
 #   - describe_workspace_directories({})
-#     - id: directories.directory_id
+#     - id: directories.directory_name
 #   - describe_workspaces({})
-#     - id: workspaces.workspace_id
+#     - id: workspaces.user_name
 #   - describe_workspaces_connection_status({})
 #     - id: workspaces_connection_status.workspace_id
 # XRay
@@ -1163,10 +1161,10 @@ coreo_aws_rule "apigateway-inventory-api-keys" do
   suggested_action "None."
   level "Informational"
   objectives ["get_api_keys"]
-  audit_objects ["object.items.id"]
+  audit_objects ["object.warnings"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.items.id"]
+  id_map ["object.warnings"]
   
 end
 coreo_aws_rule "apigateway-inventory-client-certificates" do
@@ -1231,10 +1229,10 @@ coreo_aws_rule "apigateway-inventory-sdk-types" do
   suggested_action "None."
   level "Informational"
   objectives ["get_sdk_types"]
-  audit_objects ["object.items.id"]
+  audit_objects ["object.items.friendly_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.items.id"]
+  id_map ["object.items.friendly_name"]
   
 end
 coreo_aws_rule "apigateway-inventory-usage-plans" do
@@ -1289,10 +1287,10 @@ coreo_aws_rule "appstream-inventory-fleets" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_fleets"]
-  audit_objects ["object.fleets.arn"]
+  audit_objects ["object.fleets.display_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.fleets.arn"]
+  id_map ["object.fleets.display_name"]
   
 end
 coreo_aws_rule "appstream-inventory-stacks" do
@@ -1330,10 +1328,10 @@ coreo_aws_rule "autoscaling-inventory-auto-scaling-groups" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_auto_scaling_groups"]
-  audit_objects ["object.auto_scaling_groups.auto_scaling_group_arn"]
+  audit_objects ["object.auto_scaling_groups.auto_scaling_group_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.auto_scaling_groups.auto_scaling_group_arn"]
+  id_map ["object.auto_scaling_groups.auto_scaling_group_name"]
   
 end
 coreo_aws_rule "autoscaling-inventory-auto-scaling-instances" do
@@ -1364,10 +1362,10 @@ coreo_aws_rule "autoscaling-inventory-launch-configurations" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_launch_configurations"]
-  audit_objects ["object.launch_configurations.launch_configuration_arn"]
+  audit_objects ["object.launch_configurations.image_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.launch_configurations.launch_configuration_arn"]
+  id_map ["object.launch_configurations.image_id"]
   
 end
 coreo_aws_rule "autoscaling-inventory-notification-configurations" do
@@ -1398,10 +1396,10 @@ coreo_aws_rule "autoscaling-inventory-policies" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_policies"]
-  audit_objects ["object.scaling_policies.policy_arn"]
+  audit_objects ["object.scaling_policies.auto_scaling_group_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.scaling_policies.policy_arn"]
+  id_map ["object.scaling_policies.auto_scaling_group_name"]
   
 end
 coreo_aws_rule "autoscaling-inventory-scheduled-actions" do
@@ -1630,10 +1628,10 @@ coreo_aws_rule "cloudfront-inventory-distributions" do
   suggested_action "None."
   level "Informational"
   objectives ["list_distributions"]
-  audit_objects ["object.distribution_list.items.arn"]
+  audit_objects ["object.distribution_list.items.id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.distribution_list.items.arn"]
+  id_map ["object.distribution_list.items.id"]
   
 end
 coreo_aws_rule "cloudfront-inventory-streaming-distributions" do
@@ -1647,10 +1645,10 @@ coreo_aws_rule "cloudfront-inventory-streaming-distributions" do
   suggested_action "None."
   level "Informational"
   objectives ["list_streaming_distributions"]
-  audit_objects ["object.streaming_distribution_list.items.arn"]
+  audit_objects ["object.streaming_distribution_list.items.domain_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.streaming_distribution_list.items.arn"]
+  id_map ["object.streaming_distribution_list.items.domain_name"]
   
 end
   
@@ -1753,10 +1751,10 @@ coreo_aws_rule "cloudtrail-inventory-trails" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_trails"]
-  audit_objects ["object.trail_list.trail_arn"]
+  audit_objects ["object.trail_list.kms_key_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.trail_list.trail_arn"]
+  id_map ["object.trail_list.kms_key_id"]
   
 end
   
@@ -1818,10 +1816,10 @@ coreo_aws_rule "cloudwatchevents-inventory-rules" do
   suggested_action "None."
   level "Informational"
   objectives ["list_rules"]
-  audit_objects ["object.rules.role_arn"]
+  audit_objects ["object.rules.arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.rules.role_arn"]
+  id_map ["object.rules.arn"]
   
 end
   
@@ -1859,10 +1857,10 @@ coreo_aws_rule "cloudwatchlogs-inventory-destinations" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_destinations"]
-  audit_objects ["object.destinations.role_arn"]
+  audit_objects ["object.destinations.destination_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.destinations.role_arn"]
+  id_map ["object.destinations.destination_name"]
   
 end
 coreo_aws_rule "cloudwatchlogs-inventory-log-groups" do
@@ -2122,10 +2120,10 @@ coreo_aws_rule "configservice-inventory-config-rules" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_config_rules"]
-  audit_objects ["object.config_rules.config_rule_arn"]
+  audit_objects ["object.config_rules.config_rule_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.config_rules.config_rule_arn"]
+  id_map ["object.config_rules.config_rule_name"]
   
 end
 coreo_aws_rule "configservice-inventory-configuration-recorder-status" do
@@ -2139,10 +2137,10 @@ coreo_aws_rule "configservice-inventory-configuration-recorder-status" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_configuration_recorder_status"]
-  audit_objects ["object.configuration_recorders_status.last_status_change_time"]
+  audit_objects ["object.configuration_recorders_status.name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.configuration_recorders_status.last_status_change_time"]
+  id_map ["object.configuration_recorders_status.name"]
   
 end
 coreo_aws_rule "configservice-inventory-configuration-recorders" do
@@ -2255,10 +2253,10 @@ coreo_aws_rule "databasemigrationservice-inventory-connections" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_connections"]
-  audit_objects ["object.connections.endpoint_arn"]
+  audit_objects ["object.connections.replication_instance_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.connections.endpoint_arn"]
+  id_map ["object.connections.replication_instance_arn"]
   
 end
 coreo_aws_rule "databasemigrationservice-inventory-endpoints" do
@@ -2272,10 +2270,10 @@ coreo_aws_rule "databasemigrationservice-inventory-endpoints" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_endpoints"]
-  audit_objects ["object.endpoints.endpoint_arn"]
+  audit_objects ["object.endpoints.kms_key_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.endpoints.endpoint_arn"]
+  id_map ["object.endpoints.kms_key_id"]
   
 end
 coreo_aws_rule "databasemigrationservice-inventory-orderable-replication-instances" do
@@ -2289,10 +2287,10 @@ coreo_aws_rule "databasemigrationservice-inventory-orderable-replication-instanc
   suggested_action "None."
   level "Informational"
   objectives ["describe_orderable_replication_instances"]
-  audit_objects ["object.orderable_replication_instances.min_allocated_storage"]
+  audit_objects ["object.orderable_replication_instances.engine_version"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.orderable_replication_instances.min_allocated_storage"]
+  id_map ["object.orderable_replication_instances.engine_version"]
   
 end
 coreo_aws_rule "databasemigrationservice-inventory-replication-instances" do
@@ -2306,10 +2304,10 @@ coreo_aws_rule "databasemigrationservice-inventory-replication-instances" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_replication_instances"]
-  audit_objects ["object.replication_instances.replication_instance_arn"]
+  audit_objects ["object.replication_instances.replication_instance_identifier"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.replication_instances.replication_instance_arn"]
+  id_map ["object.replication_instances.replication_instance_identifier"]
   
 end
 coreo_aws_rule "databasemigrationservice-inventory-replication-subnet-groups" do
@@ -2364,10 +2362,10 @@ coreo_aws_rule "directconnect-inventory-connections" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_connections"]
-  audit_objects ["object.connections.lag_id"]
+  audit_objects ["object.connections.connection_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.connections.lag_id"]
+  id_map ["object.connections.connection_id"]
   
 end
 coreo_aws_rule "directconnect-inventory-lags" do
@@ -2381,10 +2379,10 @@ coreo_aws_rule "directconnect-inventory-lags" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_lags"]
-  audit_objects ["object.lags.lag_id"]
+  audit_objects ["object.lags.lag_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.lags.lag_id"]
+  id_map ["object.lags.lag_name"]
   
 end
 coreo_aws_rule "directconnect-inventory-virtual-gateways" do
@@ -2439,10 +2437,10 @@ coreo_aws_rule "directoryservice-inventory-snapshots" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_snapshots"]
-  audit_objects ["object.snapshots.snapshot_id"]
+  audit_objects ["object.snapshots.directory_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.snapshots.snapshot_id"]
+  id_map ["object.snapshots.directory_id"]
   
 end
 coreo_aws_rule "directoryservice-inventory-directories" do
@@ -2456,10 +2454,10 @@ coreo_aws_rule "directoryservice-inventory-directories" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_directories"]
-  audit_objects ["object.directory_descriptions.directory_id"]
+  audit_objects ["object.directory_descriptions.short_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.directory_descriptions.directory_id"]
+  id_map ["object.directory_descriptions.short_name"]
   
 end
 coreo_aws_rule "directoryservice-inventory-event-topics" do
@@ -2490,10 +2488,10 @@ coreo_aws_rule "directoryservice-inventory-trusts" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_trusts"]
-  audit_objects ["object.trusts.trust_id"]
+  audit_objects ["object.trusts.directory_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.trusts.trust_id"]
+  id_map ["object.trusts.directory_id"]
   
 end
   
@@ -2551,74 +2549,6 @@ coreo_aws_rule_runner "dynamodbstreams-inventory-runner" do
   rules ["dynamodbstreams-inventory-streams"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
-coreo_aws_rule "ec2-inventory-account-attributes" do
-  service :EC2
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "EC2 Account Attributes Inventory"
-  description "This rule performs an inventory on the EC2 service using the describe_account_attributes function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_account_attributes"]
-  audit_objects ["object.account_attributes.attribute_name"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.account_attributes.attribute_name"]
-  
-end
-coreo_aws_rule "ec2-inventory-addresses" do
-  service :EC2
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "EC2 Addresses Inventory"
-  description "This rule performs an inventory on the EC2 service using the describe_addresses function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_addresses"]
-  audit_objects ["object.addresses.allocation_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.addresses.allocation_id"]
-  
-end
-coreo_aws_rule "ec2-inventory-availability-zones" do
-  service :EC2
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "EC2 Availability Zones Inventory"
-  description "This rule performs an inventory on the EC2 service using the describe_availability_zones function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_availability_zones"]
-  audit_objects ["object.availability_zones.region_name"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.availability_zones.region_name"]
-  
-end
-coreo_aws_rule "ec2-inventory-bundle-tasks" do
-  service :EC2
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "EC2 Bundle Tasks Inventory"
-  description "This rule performs an inventory on the EC2 service using the describe_bundle_tasks function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_bundle_tasks"]
-  audit_objects ["object.bundle_tasks.bundle_id"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.bundle_tasks.bundle_id"]
-  
-end
 coreo_aws_rule "ec2-inventory-classic-link-instances" do
   service :EC2
   action :define
@@ -2647,10 +2577,10 @@ coreo_aws_rule "ec2-inventory-conversion-tasks" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_conversion_tasks"]
-  audit_objects ["object.conversion_tasks.import_volume.volume.id"]
+  audit_objects ["object.conversion_tasks.conversion_task_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.conversion_tasks.import_volume.volume.id"]
+  id_map ["object.conversion_tasks.conversion_task_id"]
   
 end
 coreo_aws_rule "ec2-inventory-customer-gateways" do
@@ -2749,10 +2679,10 @@ coreo_aws_rule "ec2-inventory-host-reservations" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_host_reservations"]
-  audit_objects ["object.host_reservation_set.offering_id"]
+  audit_objects ["object.host_reservation_set.host_reservation_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.host_reservation_set.offering_id"]
+  id_map ["object.host_reservation_set.host_reservation_id"]
   
 end
 coreo_aws_rule "ec2-inventory-hosts" do
@@ -2783,10 +2713,10 @@ coreo_aws_rule "ec2-inventory-iam-instance-profile-associations" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_iam_instance_profile_associations"]
-  audit_objects ["object.iam_instance_profile_associations.iam_instance_profile.arn"]
+  audit_objects ["object.iam_instance_profile_associations.association_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.iam_instance_profile_associations.iam_instance_profile.arn"]
+  id_map ["object.iam_instance_profile_associations.association_id"]
   
 end
 coreo_aws_rule "ec2-inventory-import-image-tasks" do
@@ -2851,10 +2781,10 @@ coreo_aws_rule "ec2-inventory-instances" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_instances"]
-  audit_objects ["object.reservations.instances.iam_instance_profile.arn"]
+  audit_objects ["object.reservations.reservation_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.reservations.instances.iam_instance_profile.arn"]
+  id_map ["object.reservations.reservation_id"]
   
 end
 coreo_aws_rule "ec2-inventory-internet-gateways" do
@@ -2919,10 +2849,10 @@ coreo_aws_rule "ec2-inventory-nat-gateways" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_nat_gateways"]
-  audit_objects ["object.nat_gateways.subnet_id"]
+  audit_objects ["object.nat_gateways.vpc_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.nat_gateways.subnet_id"]
+  id_map ["object.nat_gateways.vpc_id"]
   
 end
 coreo_aws_rule "ec2-inventory-network-acls" do
@@ -2936,10 +2866,10 @@ coreo_aws_rule "ec2-inventory-network-acls" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_network_acls"]
-  audit_objects ["object.network_acls.vpc_id"]
+  audit_objects ["object.network_acls.network_acl_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.network_acls.vpc_id"]
+  id_map ["object.network_acls.network_acl_id"]
   
 end
 coreo_aws_rule "ec2-inventory-network-interfaces" do
@@ -2953,10 +2883,10 @@ coreo_aws_rule "ec2-inventory-network-interfaces" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_network_interfaces"]
-  audit_objects ["object.network_interfaces.subnet_id"]
+  audit_objects ["object.network_interfaces.network_interface_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.network_interfaces.subnet_id"]
+  id_map ["object.network_interfaces.network_interface_id"]
   
 end
 coreo_aws_rule "ec2-inventory-placement-groups" do
@@ -3072,10 +3002,10 @@ coreo_aws_rule "ec2-inventory-security-groups" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_security_groups"]
-  audit_objects ["object.security_groups.group_id"]
+  audit_objects ["object.security_groups.owner_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.security_groups.group_id"]
+  id_map ["object.security_groups.owner_id"]
   
 end
 coreo_aws_rule "ec2-inventory-spot-fleet-requests" do
@@ -3089,10 +3019,10 @@ coreo_aws_rule "ec2-inventory-spot-fleet-requests" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_spot_fleet_requests"]
-  audit_objects ["object.spot_fleet_request_configs.spot_fleet_request_config.launch_specifications.iam_instance_profile.arn"]
+  audit_objects ["object.spot_fleet_request_configs.spot_fleet_request_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.spot_fleet_request_configs.spot_fleet_request_config.launch_specifications.iam_instance_profile.arn"]
+  id_map ["object.spot_fleet_request_configs.spot_fleet_request_id"]
   
 end
 coreo_aws_rule "ec2-inventory-spot-instance-requests" do
@@ -3106,10 +3036,10 @@ coreo_aws_rule "ec2-inventory-spot-instance-requests" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_spot_instance_requests"]
-  audit_objects ["object.spot_instance_requests.launch_specification.iam_instance_profile.arn"]
+  audit_objects ["object.spot_instance_requests.spot_instance_request_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.spot_instance_requests.launch_specification.iam_instance_profile.arn"]
+  id_map ["object.spot_instance_requests.spot_instance_request_id"]
   
 end
 coreo_aws_rule "ec2-inventory-subnets" do
@@ -3123,10 +3053,10 @@ coreo_aws_rule "ec2-inventory-subnets" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_subnets"]
-  audit_objects ["object.subnets.vpc_id"]
+  audit_objects ["object.subnets.subnet_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.subnets.vpc_id"]
+  id_map ["object.subnets.subnet_id"]
   
 end
 coreo_aws_rule "ec2-inventory-volume-status" do
@@ -3208,10 +3138,10 @@ coreo_aws_rule "ec2-inventory-vpc-endpoints" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_vpc_endpoints"]
-  audit_objects ["object.vpc_endpoints.vpc_id"]
+  audit_objects ["object.vpc_endpoints.vpc_endpoint_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.vpc_endpoints.vpc_id"]
+  id_map ["object.vpc_endpoints.vpc_endpoint_id"]
   
 end
 coreo_aws_rule "ec2-inventory-vpc-peering-connections" do
@@ -3259,10 +3189,10 @@ coreo_aws_rule "ec2-inventory-vpn-connections" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_vpn_connections"]
-  audit_objects ["object.vpn_connections.vpn_gateway_id"]
+  audit_objects ["object.vpn_connections.vpn_connection_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.vpn_connections.vpn_gateway_id"]
+  id_map ["object.vpn_connections.vpn_connection_id"]
   
 end
 coreo_aws_rule "ec2-inventory-vpn-gateways" do
@@ -3280,6 +3210,40 @@ coreo_aws_rule "ec2-inventory-vpn-gateways" do
   operators ["=~"]
   raise_when [//]
   id_map ["object.vpn_gateways.vpn_gateway_id"]
+  
+end
+coreo_aws_rule "ec2-inventory-addresses" do
+  service :EC2
+  action :define
+  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
+  include_violations_in_count false
+  display_name "EC2 Addresses Inventory"
+  description "This rule performs an inventory on the EC2 service using the describe_addresses function"
+  category "Inventory"
+  suggested_action "None."
+  level "Informational"
+  objectives ["describe_addresses"]
+  audit_objects ["object.addresses.allocation_id"]
+  operators ["=~"]
+  raise_when [//]
+  id_map ["object.addresses.allocation_id"]
+  
+end
+coreo_aws_rule "ec2-inventory-bundle-tasks" do
+  service :EC2
+  action :define
+  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
+  include_violations_in_count false
+  display_name "EC2 Bundle Tasks Inventory"
+  description "This rule performs an inventory on the EC2 service using the describe_bundle_tasks function"
+  category "Inventory"
+  suggested_action "None."
+  level "Informational"
+  objectives ["describe_bundle_tasks"]
+  audit_objects ["object.bundle_tasks.bundle_id"]
+  operators ["=~"]
+  raise_when [//]
+  id_map ["object.bundle_tasks.bundle_id"]
   
 end
 coreo_aws_rule "ec2-inventory-regions" do
@@ -3303,7 +3267,7 @@ end
 coreo_aws_rule_runner "ec2-inventory-runner" do
   action :run
   service :EC2
-  rules ["ec2-inventory-account-attributes", "ec2-inventory-addresses", "ec2-inventory-availability-zones", "ec2-inventory-bundle-tasks", "ec2-inventory-classic-link-instances", "ec2-inventory-conversion-tasks", "ec2-inventory-customer-gateways", "ec2-inventory-dhcp-options", "ec2-inventory-egress-only-internet-gateways", "ec2-inventory-export-tasks", "ec2-inventory-flow-logs", "ec2-inventory-host-reservations", "ec2-inventory-hosts", "ec2-inventory-iam-instance-profile-associations", "ec2-inventory-import-image-tasks", "ec2-inventory-import-snapshot-tasks", "ec2-inventory-instance-status", "ec2-inventory-instances", "ec2-inventory-internet-gateways", "ec2-inventory-key-pairs", "ec2-inventory-moving-addresses", "ec2-inventory-nat-gateways", "ec2-inventory-network-acls", "ec2-inventory-network-interfaces", "ec2-inventory-placement-groups", "ec2-inventory-prefix-lists", "ec2-inventory-reserved-instances", "ec2-inventory-reserved-instances-modifications", "ec2-inventory-route-tables", "ec2-inventory-scheduled-instances", "ec2-inventory-security-groups", "ec2-inventory-spot-fleet-requests", "ec2-inventory-spot-instance-requests", "ec2-inventory-subnets", "ec2-inventory-volume-status", "ec2-inventory-volumes", "ec2-inventory-volumes-modifications", "ec2-inventory-vpc-endpoint-services", "ec2-inventory-vpc-endpoints", "ec2-inventory-vpc-peering-connections", "ec2-inventory-vpcs", "ec2-inventory-vpn-connections", "ec2-inventory-vpn-gateways", "ec2-inventory-regions"]
+  rules ["ec2-inventory-classic-link-instances", "ec2-inventory-conversion-tasks", "ec2-inventory-customer-gateways", "ec2-inventory-dhcp-options", "ec2-inventory-egress-only-internet-gateways", "ec2-inventory-export-tasks", "ec2-inventory-flow-logs", "ec2-inventory-host-reservations", "ec2-inventory-hosts", "ec2-inventory-iam-instance-profile-associations", "ec2-inventory-import-image-tasks", "ec2-inventory-import-snapshot-tasks", "ec2-inventory-instance-status", "ec2-inventory-instances", "ec2-inventory-internet-gateways", "ec2-inventory-key-pairs", "ec2-inventory-moving-addresses", "ec2-inventory-nat-gateways", "ec2-inventory-network-acls", "ec2-inventory-network-interfaces", "ec2-inventory-placement-groups", "ec2-inventory-prefix-lists", "ec2-inventory-reserved-instances", "ec2-inventory-reserved-instances-modifications", "ec2-inventory-route-tables", "ec2-inventory-scheduled-instances", "ec2-inventory-security-groups", "ec2-inventory-spot-fleet-requests", "ec2-inventory-spot-instance-requests", "ec2-inventory-subnets", "ec2-inventory-volume-status", "ec2-inventory-volumes", "ec2-inventory-volumes-modifications", "ec2-inventory-vpc-endpoint-services", "ec2-inventory-vpc-endpoints", "ec2-inventory-vpc-peering-connections", "ec2-inventory-vpcs", "ec2-inventory-vpn-connections", "ec2-inventory-vpn-gateways", "ec2-inventory-addresses", "ec2-inventory-bundle-tasks", "ec2-inventory-regions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "ecr-inventory-repositories" do
@@ -3341,10 +3305,10 @@ coreo_aws_rule "ecs-inventory-clusters" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_clusters"]
-  audit_objects ["object.failures.arn"]
+  audit_objects ["object.clusters.cluster_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.failures.arn"]
+  id_map ["object.clusters.cluster_arn"]
   
 end
 coreo_aws_rule "ecs-inventory-clusters" do
@@ -3416,10 +3380,10 @@ coreo_aws_rule "efs-inventory-file-systems" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_file_systems"]
-  audit_objects ["object.file_systems.file_system_id"]
+  audit_objects ["object.file_systems.owner_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.file_systems.file_system_id"]
+  id_map ["object.file_systems.owner_id"]
   
 end
   
@@ -3498,10 +3462,10 @@ coreo_aws_rule "elasticache-inventory-cache-clusters" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_cache_clusters"]
-  audit_objects ["object.cache_clusters.notification_configuration.topic_arn"]
+  audit_objects ["object.cache_clusters.cache_cluster_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.cache_clusters.notification_configuration.topic_arn"]
+  id_map ["object.cache_clusters.cache_cluster_id"]
   
 end
 coreo_aws_rule "elasticache-inventory-cache-engine-versions" do
@@ -3709,10 +3673,10 @@ coreo_aws_rule "elasticbeanstalk-inventory-available-solution-stacks" do
   suggested_action "None."
   level "Informational"
   objectives ["list_available_solution_stacks"]
-  audit_objects ["object.solution_stack_details.solution_stack_name"]
+  audit_objects ["object.solution_stacks"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.solution_stack_details.solution_stack_name"]
+  id_map ["object.solution_stacks"]
   
 end
 coreo_aws_rule "elasticbeanstalk-inventory-platform-versions" do
@@ -3750,10 +3714,10 @@ coreo_aws_rule "elasticloadbalancing-inventory-load-balancers" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_load_balancers"]
-  audit_objects ["object.load_balancer_descriptions.vpc_id"]
+  audit_objects ["object.load_balancer_descriptions.load_balancer_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.load_balancer_descriptions.vpc_id"]
+  id_map ["object.load_balancer_descriptions.load_balancer_name"]
   
 end
 coreo_aws_rule "elasticloadbalancing-inventory-load-balancer-policies" do
@@ -3808,10 +3772,10 @@ coreo_aws_rule "elasticloadbalancingv2-inventory-load-balancers" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_load_balancers"]
-  audit_objects ["object.load_balancers.load_balancer_arn"]
+  audit_objects ["object.load_balancers.dns_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.load_balancers.load_balancer_arn"]
+  id_map ["object.load_balancers.dns_name"]
   
 end
 coreo_aws_rule "elasticloadbalancingv2-inventory-ssl-policies" do
@@ -3866,10 +3830,10 @@ coreo_aws_rule "elastictranscoder-inventory-pipelines" do
   suggested_action "None."
   level "Informational"
   objectives ["list_pipelines"]
-  audit_objects ["object.pipelines.aws_kms_key_arn"]
+  audit_objects ["object.pipelines.arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.pipelines.aws_kms_key_arn"]
+  id_map ["object.pipelines.arn"]
   
 end
 coreo_aws_rule "elastictranscoder-inventory-presets" do
@@ -4040,10 +4004,10 @@ coreo_aws_rule "gamelift-inventory-aliases" do
   suggested_action "None."
   level "Informational"
   objectives ["list_aliases"]
-  audit_objects ["object.aliases.alias_arn"]
+  audit_objects ["object.aliases.alias_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.aliases.alias_arn"]
+  id_map ["object.aliases.alias_id"]
   
 end
 coreo_aws_rule "gamelift-inventory-fleets" do
@@ -4105,10 +4069,10 @@ coreo_aws_rule "iam-inventory-account-authorization-details" do
   suggested_action "None."
   level "Informational"
   objectives ["get_account_authorization_details"]
-  audit_objects ["object.user_detail_list.arn"]
+  audit_objects ["object.user_detail_list.path"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.user_detail_list.arn"]
+  id_map ["object.user_detail_list.path"]
   
 end
 coreo_aws_rule "iam-inventory-access-keys" do
@@ -4173,10 +4137,10 @@ coreo_aws_rule "iam-inventory-instance-profiles" do
   suggested_action "None."
   level "Informational"
   objectives ["list_instance_profiles"]
-  audit_objects ["object.instance_profiles.arn"]
+  audit_objects ["object.instance_profiles.path"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.instance_profiles.arn"]
+  id_map ["object.instance_profiles.path"]
   
 end
 coreo_aws_rule "iam-inventory-policies" do
@@ -4343,10 +4307,10 @@ coreo_aws_rule "iam-inventory-virtual-mfa-devices" do
   suggested_action "None."
   level "Informational"
   objectives ["list_virtual_mfa_devices"]
-  audit_objects ["object.virtual_mfa_devices.user.arn"]
+  audit_objects ["object.virtual_mfa_devices.serial_number"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.virtual_mfa_devices.user.arn"]
+  id_map ["object.virtual_mfa_devices.serial_number"]
   
 end
 coreo_aws_rule "iam-inventory-users" do
@@ -4459,10 +4423,10 @@ coreo_aws_rule "inspector-inventory-event-subscriptions" do
   suggested_action "None."
   level "Informational"
   objectives ["list_event_subscriptions"]
-  audit_objects ["object.subscriptions.topic_arn"]
+  audit_objects ["object.subscriptions.resource_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.subscriptions.topic_arn"]
+  id_map ["object.subscriptions.resource_arn"]
   
 end
 coreo_aws_rule "inspector-inventory-findings" do
@@ -4602,10 +4566,10 @@ coreo_aws_rule "iot-inventory-things" do
   suggested_action "None."
   level "Informational"
   objectives ["list_things"]
-  audit_objects ["object.things.thing_type_name"]
+  audit_objects ["object.things.thing_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.things.thing_type_name"]
+  id_map ["object.things.thing_name"]
   
 end
 coreo_aws_rule "iot-inventory-topic-rules" do
@@ -4732,10 +4696,10 @@ coreo_aws_rule "lambda-inventory-event-source-mappings" do
   suggested_action "None."
   level "Informational"
   objectives ["list_event_source_mappings"]
-  audit_objects ["object.event_source_mappings.function_arn"]
+  audit_objects ["object.event_source_mappings.event_source_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.event_source_mappings.function_arn"]
+  id_map ["object.event_source_mappings.event_source_arn"]
   
 end
 coreo_aws_rule "lambda-inventory-functions" do
@@ -4974,10 +4938,10 @@ coreo_aws_rule "lightsail-inventory-domains" do
   suggested_action "None."
   level "Informational"
   objectives ["get_domains"]
-  audit_objects ["object.domains.arn"]
+  audit_objects ["object.domains.name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.domains.arn"]
+  id_map ["object.domains.name"]
   
 end
 coreo_aws_rule "lightsail-inventory-instance-snapshots" do
@@ -5042,10 +5006,10 @@ coreo_aws_rule "lightsail-inventory-operations" do
   suggested_action "None."
   level "Informational"
   objectives ["get_operations"]
-  audit_objects ["object.operations.id"]
+  audit_objects ["object.operations.resource_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.operations.id"]
+  id_map ["object.operations.resource_name"]
   
 end
 coreo_aws_rule "lightsail-inventory-static-ips" do
@@ -5083,10 +5047,10 @@ coreo_aws_rule "machinelearning-inventory-batch-predictions" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_batch_predictions"]
-  audit_objects ["object.results.ml_model_id"]
+  audit_objects ["object.results.batch_prediction_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.results.ml_model_id"]
+  id_map ["object.results.batch_prediction_id"]
   
 end
 coreo_aws_rule "machinelearning-inventory-data-sources" do
@@ -5100,10 +5064,10 @@ coreo_aws_rule "machinelearning-inventory-data-sources" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_data_sources"]
-  audit_objects ["object.results.role_arn"]
+  audit_objects ["object.results.data_source_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.results.role_arn"]
+  id_map ["object.results.data_source_id"]
   
 end
 coreo_aws_rule "machinelearning-inventory-evaluations" do
@@ -5117,10 +5081,10 @@ coreo_aws_rule "machinelearning-inventory-evaluations" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_evaluations"]
-  audit_objects ["object.results.ml_model_id"]
+  audit_objects ["object.results.evaluation_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.results.ml_model_id"]
+  id_map ["object.results.evaluation_id"]
   
 end
 coreo_aws_rule "machinelearning-inventory-ml-models" do
@@ -5158,10 +5122,10 @@ coreo_aws_rule "opsworks-inventory-stacks" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_stacks"]
-  audit_objects ["object.stacks.service_role_arn"]
+  audit_objects ["object.stacks.stack_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.stacks.service_role_arn"]
+  id_map ["object.stacks.stack_id"]
   
 end
 coreo_aws_rule "opsworks-inventory-service-errors" do
@@ -5175,10 +5139,10 @@ coreo_aws_rule "opsworks-inventory-service-errors" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_service_errors"]
-  audit_objects ["object.service_errors.stack_id"]
+  audit_objects ["object.service_errors.service_error_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.service_errors.stack_id"]
+  id_map ["object.service_errors.service_error_id"]
   
 end
 coreo_aws_rule "opsworks-inventory-user-profiles" do
@@ -5233,10 +5197,10 @@ coreo_aws_rule "opsworkscm-inventory-backups" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_backups"]
-  audit_objects ["object.backups.user_arn"]
+  audit_objects ["object.backups.backup_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.backups.user_arn"]
+  id_map ["object.backups.backup_arn"]
   
 end
 coreo_aws_rule "opsworkscm-inventory-servers" do
@@ -5291,10 +5255,10 @@ coreo_aws_rule "polly-inventory-lexicons" do
   suggested_action "None."
   level "Informational"
   objectives ["list_lexicons"]
-  audit_objects ["object.lexicons.attributes.lexicon_arn"]
+  audit_objects ["object.lexicons.name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.lexicons.attributes.lexicon_arn"]
+  id_map ["object.lexicons.name"]
   
 end
   
@@ -5355,23 +5319,6 @@ coreo_aws_rule "rds-inventory-account-attributes" do
   id_map ["object.account_quotas.account_quota_name"]
   
 end
-coreo_aws_rule "rds-inventory-db-clusters" do
-  service :RDS
-  action :define
-  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
-  include_violations_in_count false
-  display_name "RDS Db Clusters Inventory"
-  description "This rule performs an inventory on the RDS service using the describe_db_clusters function"
-  category "Inventory"
-  suggested_action "None."
-  level "Informational"
-  objectives ["describe_db_clusters"]
-  audit_objects ["object.db_clusters.db_cluster_arn"]
-  operators ["=~"]
-  raise_when [//]
-  id_map ["object.db_clusters.db_cluster_arn"]
-  
-end
 coreo_aws_rule "rds-inventory-db-cluster-parameter-groups" do
   service :RDS
   action :define
@@ -5389,21 +5336,21 @@ coreo_aws_rule "rds-inventory-db-cluster-parameter-groups" do
   id_map ["object.db_cluster_parameter_groups.db_cluster_parameter_group_arn"]
   
 end
-coreo_aws_rule "rds-inventory-db-instances" do
+coreo_aws_rule "rds-inventory-db-cluster-snapshots" do
   service :RDS
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
-  display_name "RDS Db Instances Inventory"
-  description "This rule performs an inventory on the RDS service using the describe_db_instances function"
+  display_name "RDS Db Cluster Snapshots Inventory"
+  description "This rule performs an inventory on the RDS service using the describe_db_cluster_snapshots function"
   category "Inventory"
   suggested_action "None."
   level "Informational"
-  objectives ["describe_db_instances"]
-  audit_objects ["object.db_instances.tde_credential_arn"]
+  objectives ["describe_db_cluster_snapshots"]
+  audit_objects ["object.db_cluster_snapshots.db_cluster_snapshot_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.db_instances.tde_credential_arn"]
+  id_map ["object.db_cluster_snapshots.db_cluster_snapshot_arn"]
   
 end
 coreo_aws_rule "rds-inventory-db-engine-versions" do
@@ -5417,27 +5364,44 @@ coreo_aws_rule "rds-inventory-db-engine-versions" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_db_engine_versions"]
-  audit_objects ["object.db_engine_versions.default_character_set.character_set_name"]
+  audit_objects ["object.db_engine_versions.engine"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.db_engine_versions.default_character_set.character_set_name"]
+  id_map ["object.db_engine_versions.engine"]
   
 end
-coreo_aws_rule "rds-inventory-db-cluster-snapshots" do
+coreo_aws_rule "rds-inventory-db-clusters" do
   service :RDS
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
-  display_name "RDS Db Cluster Snapshots Inventory"
-  description "This rule performs an inventory on the RDS service using the describe_db_cluster_snapshots function"
+  display_name "RDS Db Clusters Inventory"
+  description "This rule performs an inventory on the RDS service using the describe_db_clusters function"
   category "Inventory"
   suggested_action "None."
   level "Informational"
-  objectives ["describe_db_cluster_snapshots"]
-  audit_objects ["object.db_cluster_snapshots.source_db_cluster_snapshot_arn"]
+  objectives ["describe_db_clusters"]
+  audit_objects ["object.db_clusters.allocated_storage"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.db_cluster_snapshots.source_db_cluster_snapshot_arn"]
+  id_map ["object.db_clusters.allocated_storage"]
+  
+end
+coreo_aws_rule "rds-inventory-db-instances" do
+  service :RDS
+  action :define
+  link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
+  include_violations_in_count false
+  display_name "RDS Db Instances Inventory"
+  description "This rule performs an inventory on the RDS service using the describe_db_instances function"
+  category "Inventory"
+  suggested_action "None."
+  level "Informational"
+  objectives ["describe_db_instances"]
+  audit_objects ["object.db_instances.db_name"]
+  operators ["=~"]
+  raise_when [//]
+  id_map ["object.db_instances.db_name"]
   
 end
 coreo_aws_rule "rds-inventory-db-parameter-groups" do
@@ -5485,10 +5449,10 @@ coreo_aws_rule "rds-inventory-db-snapshots" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_db_snapshots"]
-  audit_objects ["object.db_snapshots.db_snapshot_arn"]
+  audit_objects ["object.db_snapshots.tde_credential_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.db_snapshots.db_snapshot_arn"]
+  id_map ["object.db_snapshots.tde_credential_arn"]
   
 end
 coreo_aws_rule "rds-inventory-db-subnet-groups" do
@@ -5536,10 +5500,10 @@ coreo_aws_rule "rds-inventory-event-subscriptions" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_event_subscriptions"]
-  audit_objects ["object.event_subscriptions_list.event_subscription_arn"]
+  audit_objects ["object.event_subscriptions_list.sns_topic_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.event_subscriptions_list.event_subscription_arn"]
+  id_map ["object.event_subscriptions_list.sns_topic_arn"]
   
 end
 coreo_aws_rule "rds-inventory-option-groups" do
@@ -5553,10 +5517,10 @@ coreo_aws_rule "rds-inventory-option-groups" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_option_groups"]
-  audit_objects ["object.option_groups_list.option_group_arn"]
+  audit_objects ["object.option_groups_list.option_group_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.option_groups_list.option_group_arn"]
+  id_map ["object.option_groups_list.option_group_name"]
   
 end
 coreo_aws_rule "rds-inventory-pending-maintenance-actions" do
@@ -5570,10 +5534,10 @@ coreo_aws_rule "rds-inventory-pending-maintenance-actions" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_pending_maintenance_actions"]
-  audit_objects ["object.pending_maintenance_actions.pending_maintenance_action_details"]
+  audit_objects ["object.pending_maintenance_actions.resource_identifier"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.pending_maintenance_actions.pending_maintenance_action_details"]
+  id_map ["object.pending_maintenance_actions.resource_identifier"]
   
 end
 coreo_aws_rule "rds-inventory-reserved-db-instances" do
@@ -5614,7 +5578,7 @@ end
 coreo_aws_rule_runner "rds-inventory-runner" do
   action :run
   service :RDS
-  rules ["rds-inventory-events", "rds-inventory-certificates", "rds-inventory-account-attributes", "rds-inventory-db-clusters", "rds-inventory-db-cluster-parameter-groups", "rds-inventory-db-instances", "rds-inventory-db-engine-versions", "rds-inventory-db-cluster-snapshots", "rds-inventory-db-parameter-groups", "rds-inventory-db-security-groups", "rds-inventory-db-snapshots", "rds-inventory-db-subnet-groups", "rds-inventory-event-categories", "rds-inventory-event-subscriptions", "rds-inventory-option-groups", "rds-inventory-pending-maintenance-actions", "rds-inventory-reserved-db-instances", "rds-inventory-source-regions"]
+  rules ["rds-inventory-events", "rds-inventory-certificates", "rds-inventory-account-attributes", "rds-inventory-db-cluster-parameter-groups", "rds-inventory-db-cluster-snapshots", "rds-inventory-db-engine-versions", "rds-inventory-db-clusters", "rds-inventory-db-instances", "rds-inventory-db-parameter-groups", "rds-inventory-db-security-groups", "rds-inventory-db-snapshots", "rds-inventory-db-subnet-groups", "rds-inventory-event-categories", "rds-inventory-event-subscriptions", "rds-inventory-option-groups", "rds-inventory-pending-maintenance-actions", "rds-inventory-reserved-db-instances", "rds-inventory-source-regions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
 end
 coreo_aws_rule "redshift-inventory-clusters" do
@@ -5628,10 +5592,10 @@ coreo_aws_rule "redshift-inventory-clusters" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_clusters"]
-  audit_objects ["object.clusters.iam_roles.iam_role_arn"]
+  audit_objects ["object.clusters.cluster_identifier"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.clusters.iam_roles.iam_role_arn"]
+  id_map ["object.clusters.cluster_identifier"]
   
 end
 coreo_aws_rule "redshift-inventory-events" do
@@ -5662,10 +5626,10 @@ coreo_aws_rule "redshift-inventory-event-categories" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_event_categories"]
-  audit_objects ["object.event_categories_map_list.events.event_id"]
+  audit_objects ["object.event_categories_map_list.source_type"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.event_categories_map_list.events.event_id"]
+  id_map ["object.event_categories_map_list.source_type"]
   
 end
 coreo_aws_rule "redshift-inventory-event-subscriptions" do
@@ -5713,10 +5677,10 @@ coreo_aws_rule "redshift-inventory-cluster-snapshots" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_cluster_snapshots"]
-  audit_objects ["object.snapshots.kms_key_id"]
+  audit_objects ["object.snapshots.snapshot_identifier"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.snapshots.kms_key_id"]
+  id_map ["object.snapshots.snapshot_identifier"]
   
 end
 coreo_aws_rule "redshift-inventory-cluster-subnet-groups" do
@@ -6003,10 +5967,10 @@ coreo_aws_rule "s3-inventory-buckets" do
   suggested_action "None."
   level "Informational"
   objectives ["list_buckets"]
-  audit_objects ["object.owner.id"]
+  audit_objects ["object.bucket.bucket_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.owner.id"]
+  id_map ["object.bucket.bucket_name"]
   
 end
   
@@ -6136,10 +6100,10 @@ coreo_aws_rule "sms-inventory-connectors" do
   suggested_action "None."
   level "Informational"
   objectives ["get_connectors"]
-  audit_objects ["object.connector_list.vm_manager_id"]
+  audit_objects ["object.connector_list.connector_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.connector_list.vm_manager_id"]
+  id_map ["object.connector_list.connector_id"]
   
 end
 coreo_aws_rule "sms-inventory-replication-jobs" do
@@ -6211,10 +6175,10 @@ coreo_aws_rule "sns-inventory-subscriptions" do
   suggested_action "None."
   level "Informational"
   objectives ["list_subscriptions"]
-  audit_objects ["object.subscriptions.topic_arn"]
+  audit_objects ["object.subscriptions.subscription_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.subscriptions.topic_arn"]
+  id_map ["object.subscriptions.subscription_arn"]
   
 end
 coreo_aws_rule "sns-inventory-topics" do
@@ -6344,10 +6308,10 @@ coreo_aws_rule "ssm-inventory-patch-groups" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_patch_groups"]
-  audit_objects ["object.mappings.baseline_identity.baseline_id"]
+  audit_objects ["object.mappings.patch_group"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.mappings.baseline_identity.baseline_id"]
+  id_map ["object.mappings.patch_group"]
   
 end
 coreo_aws_rule "ssm-inventory-associations" do
@@ -6378,10 +6342,10 @@ coreo_aws_rule "ssm-inventory-command-invocations" do
   suggested_action "None."
   level "Informational"
   objectives ["list_command_invocations"]
-  audit_objects ["object.command_invocations.notification_config.notification_arn"]
+  audit_objects ["object.command_invocations.command_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.command_invocations.notification_config.notification_arn"]
+  id_map ["object.command_invocations.command_id"]
   
 end
 coreo_aws_rule "ssm-inventory-commands" do
@@ -6395,10 +6359,10 @@ coreo_aws_rule "ssm-inventory-commands" do
   suggested_action "None."
   level "Informational"
   objectives ["list_commands"]
-  audit_objects ["object.commands.notification_config.notification_arn"]
+  audit_objects ["object.commands.command_id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.commands.notification_config.notification_arn"]
+  id_map ["object.commands.command_id"]
   
 end
   
@@ -6419,10 +6383,10 @@ coreo_aws_rule "servicecatalog-inventory-accepted-portfolio-shares" do
   suggested_action "None."
   level "Informational"
   objectives ["list_accepted_portfolio_shares"]
-  audit_objects ["object.portfolio_details.arn"]
+  audit_objects ["object.portfolio_details.id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.portfolio_details.arn"]
+  id_map ["object.portfolio_details.id"]
   
 end
 coreo_aws_rule "servicecatalog-inventory-portfolios" do
@@ -6436,10 +6400,10 @@ coreo_aws_rule "servicecatalog-inventory-portfolios" do
   suggested_action "None."
   level "Informational"
   objectives ["list_portfolios"]
-  audit_objects ["object.portfolio_details.arn"]
+  audit_objects ["object.portfolio_details.id"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.portfolio_details.arn"]
+  id_map ["object.portfolio_details.id"]
   
 end
   
@@ -6658,10 +6622,10 @@ coreo_aws_rule "storagegateway-inventory-tapes" do
   suggested_action "None."
   level "Informational"
   objectives ["list_tapes"]
-  audit_objects ["object.tape_infos.gateway_arn"]
+  audit_objects ["object.tape_infos.tape_arn"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.tape_infos.gateway_arn"]
+  id_map ["object.tape_infos.tape_arn"]
   
 end
 coreo_aws_rule "storagegateway-inventory-volumes" do
@@ -6968,10 +6932,10 @@ coreo_aws_rule "workspaces-inventory-workspace-directories" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_workspace_directories"]
-  audit_objects ["object.directories.directory_id"]
+  audit_objects ["object.directories.directory_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.directories.directory_id"]
+  id_map ["object.directories.directory_name"]
   
 end
 coreo_aws_rule "workspaces-inventory-workspaces" do
@@ -6985,10 +6949,10 @@ coreo_aws_rule "workspaces-inventory-workspaces" do
   suggested_action "None."
   level "Informational"
   objectives ["describe_workspaces"]
-  audit_objects ["object.workspaces.workspace_id"]
+  audit_objects ["object.workspaces.user_name"]
   operators ["=~"]
   raise_when [//]
-  id_map ["object.workspaces.workspace_id"]
+  id_map ["object.workspaces.user_name"]
   
 end
 coreo_aws_rule "workspaces-inventory-workspaces-connection-status" do

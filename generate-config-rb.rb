@@ -4,12 +4,16 @@ require 'nokogiri'
 require 'open-uri'
 require 'yaml'
 
-# @specify_services = ["Route53"]
+# @specify_services = ["EC2"]
 
-@global_ignorables = Regexp.union( /offerings$/ )
+@global_ignorables = Regexp.union(/offerings$/)
 
 @modified_methods = {
-  :EC2 => [{ :describe_images => { owners: ["self"] } }, { :describe_snapshots => { owner_ids: ["self"] } }]
+  :EC2 => [{ :describe_images => { owners: ["static.self"] } }, { :describe_snapshots => { owner_ids: ["static.self"] } }]
+}
+@id_overrides = {
+  :S3 => { :list_buckets => "bucket.bucket_name" },
+  :EC2 => { :describe_addresses => "addresses.allocation_id", :describe_bundle_tasks => "bundle_tasks.bundle_id"}
 }
 @engine_bug_exclusions = {
   :EC2 => ["describe_images", "describe_snapshots"],
@@ -27,7 +31,7 @@ require 'yaml'
   :CloudHSM => ["list_available_zones"],
   :CloudFormation => ["describe_account_limits"],
   :AutoScaling => ["describe_scaling_activities", "describe_adjustment_types", "describe_auto_scaling_notification_types", "describe_lifecycle_hook_types", "describe_metric_collection_types", "describe_scaling_process_types", "describe_termination_policy_types"],
-  :EC2 => ["describe_reserved_instances_offerings"],
+  :EC2 => ["describe_reserved_instances_offerings", "describe_account_attributes", "describe_availability_zones"],
   :RDS => ["describe_reserved_db_instances_offerings"]
 
 }
@@ -37,8 +41,8 @@ require 'yaml'
 def get_options(service_sym, method_sym)
   modified_service_call_hash = @modified_methods[service_sym]
   if modified_service_call_hash
-    modified_service_call_hash.each { |m_hash|
-      m_hash.each { |method, options|
+    modified_service_call_hash.each {|m_hash|
+      m_hash.each {|method, options|
         return options if method.eql?(method_sym)
       }
     }
@@ -47,7 +51,7 @@ def get_options(service_sym, method_sym)
 end
 
 def get_regions
-  @ec2_regions = Aws::EC2::Client.new.describe_regions().regions.collect { |x| x.region_name }.sort
+  @ec2_regions = Aws::EC2::Client.new.describe_regions().regions.collect {|x| x.region_name}.sort
   return @ec2_regions
 end
 
@@ -87,7 +91,7 @@ addVariableToYaml('AUDIT_AWS_INVENTORY_REGIONS',
                   get_regions)
 
 def writeLine(line)
-  open('./services/config.rb', 'a') { |f|
+  open('./services/config.rb', 'a') {|f|
     f.puts line
   }
 end
@@ -105,19 +109,21 @@ end
 def get_id_from_possibilities(possible_ids)
   search = [/arn\b/, /\.id/, /_id\b/, /_name\b/, /\[0\]/]
   found_possibilities = []
-  search.each { |s|
-    possible_ids.each { |pid|
+  search.each {|s|
+    index = 0
+    possible_ids.each {|pid|
       if pid =~ s
         id = pid.gsub('resp.', '')
-        found_possibilities.push(id)
+        found_possibilities.push({ :id => id, :index => index })
+        index+=1
       end
     }
   }
   return "NA" if found_possibilities.size.eql?(0)
-  sorted_possibilities = found_possibilities.sort_by { |x| x.count('.') }
-  search.each { |s|
-    sorted_possibilities.each { |pid|
-      return pid.gsub('[0]', '') if pid =~ s
+  sorted_possibilities = found_possibilities.sort {|a, b| [a[:id].count('.'), a[:index]] <=> [b[:id].count('.'), b[:index]]}
+  sorted_possibilities.each {|pid|
+    search.each {|s|
+      return pid[:id].gsub('[0]', '') if pid[:id] =~ s
     }
   }
   return "NA"
@@ -126,6 +132,10 @@ end
 @docs = {}
 
 def getEntryFromHtml(service, method)
+
+  if @id_overrides[service.to_sym] && @id_overrides[service.to_sym][method.to_sym]
+    return @id_overrides[service.to_sym][method.to_sym]
+  end
   url = "http://docs.aws.amazon.com/sdkforruby/api/Aws/#{service}/Client.html"
   doc = Nokogiri::HTML(open(url)) unless @docs[url]
   @docs[url] = doc if doc
@@ -135,7 +145,7 @@ def getEntryFromHtml(service, method)
   example_doc = tag_doc.css('pre[class="example code"]').last
   example_doc_details = example_doc.css('span[class="id identifier rubyid_resp"]')
   possible_ids = []
-  example_doc_details.each { |e|
+  example_doc_details.each {|e|
     possible_ids.push(compose_line(e))
   }
   return get_id_from_possibilities(possible_ids)
@@ -155,11 +165,11 @@ Aws.partition('aws').services.each do |s|
     next
   end
 
-  relevant_methods = aws_client.methods.collect { |method| method if method =~ /(get|describe|list)/ }.compact.reject { |method| method.empty? || method =~ /tags/ || method !~ /s$/ }
+  relevant_methods = aws_client.methods.collect {|method| method if method =~ /(get|describe|list)/}.compact.reject {|method| method.empty? || method =~ /tags/ || method !~ /s$/}
   ## we have a client
 
   ## if it doesnt require and argument, it is an inventory method
-  relevant_methods.each { |r|
+  relevant_methods.each {|r|
     if @global_ignorables =~ r.to_s
       writeLine "#   - #{r} <- SKIPPING due to @global_ignorables"
       next
@@ -197,12 +207,12 @@ Aws.partition('aws').services.each do |s|
   }
 end
 
-@id_map.each_pair { |s, inv_hash|
+@id_map.each_pair {|s, inv_hash|
   c = inv_hash[:client]
   service = s.to_s
   sClass = c.class.to_s.split('::')[1]
   service_rules = []
-  inv_hash[:methods].each_pair { |method, m_hash|
+  inv_hash[:methods].each_pair {|method, m_hash|
     id = m_hash[:id]
     modifier = m_hash[:mod]
     next if id.eql?("NA")
