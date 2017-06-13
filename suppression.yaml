@@ -229,7 +229,19 @@ iam-active-root-user:
 iam-mfa-password-holders:
   - put-your-object-id-here-1: ""
   - put-your-object-id-here-2: "2017-01-10T00:00Z"
+manual-maintenance-records:
+  - put-your-object-id-here-1: ""
+  - put-your-object-id-here-2: "2017-01-10T00:00Z"
+manual-approved-monitored-maintenance:
+  - put-your-object-id-here-1: ""
+  - put-your-object-id-here-2: "2017-01-10T00:00Z"
+manual-component-removal-approval:
+  - put-your-object-id-here-1: ""
+  - put-your-object-id-here-2: "2017-01-10T00:00Z"
 manual-ensure-security-questions:
+  - put-your-object-id-here-1: ""
+  - put-your-object-id-here-2: "2017-01-10T00:00Z"
+manual-obscure-auth-info:
   - put-your-object-id-here-1: ""
   - put-your-object-id-here-2: "2017-01-10T00:00Z"
 manual-detailed-billing:

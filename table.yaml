@@ -14,7 +14,8 @@ cloudtrail-log-file-validating:
  "Region": "+__OBJECT__.violations.__RULE__.region+~https://console.aws.amazon.com/cloudtrail/home?region=+__OBJECT__.violations.__RULE__.region+#"
 cloudtrail-logs-encrypted:
  "Trail Name": "__OBJECT__"
- "AWS Region": "+__OBJECT__.violations.__RULE__.region+"cloudwatch-inventory:
+ "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
+cloudwatch-inventory:
   "AWS Cloud Object Name": "__OBJECT__~https://console.aws.amazon.com/cloudwatch/home?region=+__OBJECT__.violations.__RULE__.region+#alarm:alarmFilter=ANY;name=__OBJECT__"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
 cloudwatchlogs-inventory:
@@ -41,63 +42,67 @@ ec2-inventory-security-groups:
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-ip-address-whitelisted:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=+__OBJECT__+;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-unrestricted-traffic:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-1521-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-3306-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-5432-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-1433-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-27017-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-3389-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-22-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-TCP-5439-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
-ec2-TCP-23-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+ec2-TCP-23:
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
-ec2-TCP-21-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+ec2-TCP-21:
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
-ec2-TCP-20-0.0.0.0/0:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+ec2-TCP-20:
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
+  "AWS Tags": "__TAGS__"
+ec2-TCP-8080:
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-ports-range:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-not-used-security-groups:
-  "AWS Object ID": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
+  "Security Group": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#SecurityGroups:search=__OBJECT__;sort=desc:tag:Name"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
 ec2-vpc-flow-logs:
@@ -117,7 +122,8 @@ elb-old-ssl-policy:
 elb-current-ssl-policy:
   "Load Balancer": "__OBJECT__~https://console.aws.amazon.com/ec2/v2/home?region=+__OBJECT__.violations.__RULE__.region+#LoadBalancers:search=__OBJECT__"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
-  "AWS Tags": "__TAGS__"iam-inventory-users:
+  "AWS Tags": "__TAGS__"
+iam-inventory-users:
   "IAM Users": "__OBJECT__~https://console.aws.amazon.com/iam/home?region=+__OBJECT__.violations.__RULE__.region+#/users/__OBJECT__"
   "User ID": "+__OBJECT__.violations.__RULE__.result_info.0.object.user_id+"
   "User ARN": "+__OBJECT__.violations.__RULE__.result_info.0.object.arn+"
@@ -202,7 +208,8 @@ iam-mfa-password-holders:
 iam-unused-access:
   "Password Policy": "__OBJECT__~https://us-east-1.console.aws.amazon.com/iam/home?region=+__OBJECT__.violations.__RULE__.region+#/credential_report"   
 iam-initialization-access-key:
-  "Password Policy": "__OBJECT__~https://us-east-1.console.aws.amazon.com/iam/home?region=+__OBJECT__.violations.__RULE__.region+#/credential_report"kms-inventory:
+  "Password Policy": "__OBJECT__~https://us-east-1.console.aws.amazon.com/iam/home?region=+__OBJECT__.violations.__RULE__.region+#/credential_report"
+kms-inventory:
   "AWS Cloud Object Name": "__OBJECT__"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
@@ -254,14 +261,11 @@ redshift-no-user-logging:
   "AWS Object ID": "__OBJECT__~https://+__OBJECT__.violations.__RULE__.region+.console.aws.amazon.com/redshift/home?region=+__OBJECT__.violations.__RULE__.region+#edit-parameter-group:param-group=__OBJECT__;cluster="
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
-redshift-no-user-logging:
-  "AWS Object ID": "__OBJECT__~https://+__OBJECT__.violations.__RULE__.region+.console.aws.amazon.com/redshift/home?region=+__OBJECT__.violations.__RULE__.region+#edit-parameter-group:param-group=__OBJECT__;cluster="
-  "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
-  "AWS Tags": "__TAGS__"
 redshift-snapshot-retention:
   "AWS Object ID": "__OBJECT__~https://+__OBJECT__.violations.__RULE__.region+.console.aws.amazon.com/redshift/home?region=+__OBJECT__.violations.__RULE__.region+#cluster-details:cluster=__OBJECT__"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
-  "AWS Tags": "__TAGS__"sns-topics-inventory:
+  "AWS Tags": "__TAGS__"
+sns-topics-inventory:
   "AWS Cloud Object Name": "__OBJECT__"
   "AWS Region": "+__OBJECT__.violations.__RULE__.region+"
   "AWS Tags": "__TAGS__"
