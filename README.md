@@ -46,6 +46,9 @@ This composite scans all AWS services and reports on the inventory of objects fo
 ### `AUDIT_AWS_INVENTORY_ALERT_RECIPIENT`:
   * description: Enter the email address(es) that will receive notifications. If more than one, separate each with a comma.
 
+### `FILTERED_OBJECTS`:
+  * description: JSON object of string or regex of aws objects to include or exclude and tag in audit
+
 ## Tags
 1. Inventory
 
