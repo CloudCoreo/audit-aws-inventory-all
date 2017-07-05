@@ -1127,7 +1127,7 @@
 #   - batch_get_traces({})
 #   - get_trace_summaries({})
 coreo_aws_rule "acm-inventory-certificates" do
-  service :ACM
+  service :acm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -1146,7 +1146,7 @@ end
   
 coreo_aws_rule_runner "acm-inventory-runner" do
   action :run
-  service :ACM
+  service :acm
   rules ["acm-inventory-certificates"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
@@ -2576,7 +2576,7 @@ coreo_aws_rule_runner "dynamodbstreams-inventory-runner" do
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "ec2-inventory-classic-link-instances" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2593,7 +2593,7 @@ coreo_aws_rule "ec2-inventory-classic-link-instances" do
   
 end
 coreo_aws_rule "ec2-inventory-conversion-tasks" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2610,7 +2610,7 @@ coreo_aws_rule "ec2-inventory-conversion-tasks" do
   
 end
 coreo_aws_rule "ec2-inventory-customer-gateways" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2627,7 +2627,7 @@ coreo_aws_rule "ec2-inventory-customer-gateways" do
   
 end
 coreo_aws_rule "ec2-inventory-dhcp-options" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2644,7 +2644,7 @@ coreo_aws_rule "ec2-inventory-dhcp-options" do
   
 end
 coreo_aws_rule "ec2-inventory-egress-only-internet-gateways" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2661,7 +2661,7 @@ coreo_aws_rule "ec2-inventory-egress-only-internet-gateways" do
   
 end
 coreo_aws_rule "ec2-inventory-export-tasks" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2678,7 +2678,7 @@ coreo_aws_rule "ec2-inventory-export-tasks" do
   
 end
 coreo_aws_rule "ec2-inventory-flow-logs" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2695,7 +2695,7 @@ coreo_aws_rule "ec2-inventory-flow-logs" do
   
 end
 coreo_aws_rule "ec2-inventory-host-reservations" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2712,7 +2712,7 @@ coreo_aws_rule "ec2-inventory-host-reservations" do
   
 end
 coreo_aws_rule "ec2-inventory-hosts" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2729,7 +2729,7 @@ coreo_aws_rule "ec2-inventory-hosts" do
   
 end
 coreo_aws_rule "ec2-inventory-iam-instance-profile-associations" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2746,7 +2746,7 @@ coreo_aws_rule "ec2-inventory-iam-instance-profile-associations" do
   
 end
 coreo_aws_rule "ec2-inventory-import-image-tasks" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2763,7 +2763,7 @@ coreo_aws_rule "ec2-inventory-import-image-tasks" do
   
 end
 coreo_aws_rule "ec2-inventory-import-snapshot-tasks" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2780,7 +2780,7 @@ coreo_aws_rule "ec2-inventory-import-snapshot-tasks" do
   
 end
 coreo_aws_rule "ec2-inventory-instance-status" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2797,7 +2797,7 @@ coreo_aws_rule "ec2-inventory-instance-status" do
   
 end
 coreo_aws_rule "ec2-inventory-instances" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2814,7 +2814,7 @@ coreo_aws_rule "ec2-inventory-instances" do
   
 end
 coreo_aws_rule "ec2-inventory-internet-gateways" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2831,7 +2831,7 @@ coreo_aws_rule "ec2-inventory-internet-gateways" do
   
 end
 coreo_aws_rule "ec2-inventory-key-pairs" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2848,7 +2848,7 @@ coreo_aws_rule "ec2-inventory-key-pairs" do
   
 end
 coreo_aws_rule "ec2-inventory-moving-addresses" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2865,7 +2865,7 @@ coreo_aws_rule "ec2-inventory-moving-addresses" do
   
 end
 coreo_aws_rule "ec2-inventory-nat-gateways" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2882,7 +2882,7 @@ coreo_aws_rule "ec2-inventory-nat-gateways" do
   
 end
 coreo_aws_rule "ec2-inventory-network-acls" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2899,7 +2899,7 @@ coreo_aws_rule "ec2-inventory-network-acls" do
   
 end
 coreo_aws_rule "ec2-inventory-network-interfaces" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2916,7 +2916,7 @@ coreo_aws_rule "ec2-inventory-network-interfaces" do
   
 end
 coreo_aws_rule "ec2-inventory-placement-groups" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2933,7 +2933,7 @@ coreo_aws_rule "ec2-inventory-placement-groups" do
   
 end
 coreo_aws_rule "ec2-inventory-prefix-lists" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2950,7 +2950,7 @@ coreo_aws_rule "ec2-inventory-prefix-lists" do
   
 end
 coreo_aws_rule "ec2-inventory-reserved-instances" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2967,7 +2967,7 @@ coreo_aws_rule "ec2-inventory-reserved-instances" do
   
 end
 coreo_aws_rule "ec2-inventory-reserved-instances-modifications" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -2984,7 +2984,7 @@ coreo_aws_rule "ec2-inventory-reserved-instances-modifications" do
   
 end
 coreo_aws_rule "ec2-inventory-route-tables" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3001,7 +3001,7 @@ coreo_aws_rule "ec2-inventory-route-tables" do
   
 end
 coreo_aws_rule "ec2-inventory-scheduled-instances" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3018,7 +3018,7 @@ coreo_aws_rule "ec2-inventory-scheduled-instances" do
   
 end
 coreo_aws_rule "ec2-inventory-security-groups" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3035,7 +3035,7 @@ coreo_aws_rule "ec2-inventory-security-groups" do
   
 end
 coreo_aws_rule "ec2-inventory-spot-fleet-requests" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3052,7 +3052,7 @@ coreo_aws_rule "ec2-inventory-spot-fleet-requests" do
   
 end
 coreo_aws_rule "ec2-inventory-spot-instance-requests" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3069,7 +3069,7 @@ coreo_aws_rule "ec2-inventory-spot-instance-requests" do
   
 end
 coreo_aws_rule "ec2-inventory-subnets" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3086,7 +3086,7 @@ coreo_aws_rule "ec2-inventory-subnets" do
   
 end
 coreo_aws_rule "ec2-inventory-volume-status" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3103,7 +3103,7 @@ coreo_aws_rule "ec2-inventory-volume-status" do
   
 end
 coreo_aws_rule "ec2-inventory-volumes" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3120,7 +3120,7 @@ coreo_aws_rule "ec2-inventory-volumes" do
   
 end
 coreo_aws_rule "ec2-inventory-volumes-modifications" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3137,7 +3137,7 @@ coreo_aws_rule "ec2-inventory-volumes-modifications" do
   
 end
 coreo_aws_rule "ec2-inventory-vpc-endpoint-services" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3154,7 +3154,7 @@ coreo_aws_rule "ec2-inventory-vpc-endpoint-services" do
   
 end
 coreo_aws_rule "ec2-inventory-vpc-endpoints" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3171,7 +3171,7 @@ coreo_aws_rule "ec2-inventory-vpc-endpoints" do
   
 end
 coreo_aws_rule "ec2-inventory-vpc-peering-connections" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3188,7 +3188,7 @@ coreo_aws_rule "ec2-inventory-vpc-peering-connections" do
   
 end
 coreo_aws_rule "ec2-inventory-vpcs" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3205,7 +3205,7 @@ coreo_aws_rule "ec2-inventory-vpcs" do
   
 end
 coreo_aws_rule "ec2-inventory-vpn-connections" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3222,7 +3222,7 @@ coreo_aws_rule "ec2-inventory-vpn-connections" do
   
 end
 coreo_aws_rule "ec2-inventory-vpn-gateways" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3239,7 +3239,7 @@ coreo_aws_rule "ec2-inventory-vpn-gateways" do
   
 end
 coreo_aws_rule "ec2-inventory-addresses" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3256,7 +3256,7 @@ coreo_aws_rule "ec2-inventory-addresses" do
   
 end
 coreo_aws_rule "ec2-inventory-bundle-tasks" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3273,7 +3273,7 @@ coreo_aws_rule "ec2-inventory-bundle-tasks" do
   
 end
 coreo_aws_rule "ec2-inventory-regions" do
-  service :EC2
+  service :ec2
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3292,13 +3292,13 @@ end
   
 coreo_aws_rule_runner "ec2-inventory-runner" do
   action :run
-  service :EC2
+  service :ec2
   rules ["ec2-inventory-classic-link-instances", "ec2-inventory-conversion-tasks", "ec2-inventory-customer-gateways", "ec2-inventory-dhcp-options", "ec2-inventory-egress-only-internet-gateways", "ec2-inventory-export-tasks", "ec2-inventory-flow-logs", "ec2-inventory-host-reservations", "ec2-inventory-hosts", "ec2-inventory-iam-instance-profile-associations", "ec2-inventory-import-image-tasks", "ec2-inventory-import-snapshot-tasks", "ec2-inventory-instance-status", "ec2-inventory-instances", "ec2-inventory-internet-gateways", "ec2-inventory-key-pairs", "ec2-inventory-moving-addresses", "ec2-inventory-nat-gateways", "ec2-inventory-network-acls", "ec2-inventory-network-interfaces", "ec2-inventory-placement-groups", "ec2-inventory-prefix-lists", "ec2-inventory-reserved-instances", "ec2-inventory-reserved-instances-modifications", "ec2-inventory-route-tables", "ec2-inventory-scheduled-instances", "ec2-inventory-security-groups", "ec2-inventory-spot-fleet-requests", "ec2-inventory-spot-instance-requests", "ec2-inventory-subnets", "ec2-inventory-volume-status", "ec2-inventory-volumes", "ec2-inventory-volumes-modifications", "ec2-inventory-vpc-endpoint-services", "ec2-inventory-vpc-endpoints", "ec2-inventory-vpc-peering-connections", "ec2-inventory-vpcs", "ec2-inventory-vpn-connections", "ec2-inventory-vpn-gateways", "ec2-inventory-addresses", "ec2-inventory-bundle-tasks", "ec2-inventory-regions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "ecr-inventory-repositories" do
-  service :ECR
+  service :ecr
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3317,13 +3317,13 @@ end
   
 coreo_aws_rule_runner "ecr-inventory-runner" do
   action :run
-  service :ECR
+  service :ecr
   rules ["ecr-inventory-repositories"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "ecs-inventory-clusters" do
-  service :ECS
+  service :ecs
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3340,7 +3340,7 @@ coreo_aws_rule "ecs-inventory-clusters" do
   
 end
 coreo_aws_rule "ecs-inventory-clusters" do
-  service :ECS
+  service :ecs
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3357,7 +3357,7 @@ coreo_aws_rule "ecs-inventory-clusters" do
   
 end
 coreo_aws_rule "ecs-inventory-task-definition-families" do
-  service :ECS
+  service :ecs
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3374,7 +3374,7 @@ coreo_aws_rule "ecs-inventory-task-definition-families" do
   
 end
 coreo_aws_rule "ecs-inventory-task-definitions" do
-  service :ECS
+  service :ecs
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3393,13 +3393,13 @@ end
   
 coreo_aws_rule_runner "ecs-inventory-runner" do
   action :run
-  service :ECS
+  service :ecs
   rules ["ecs-inventory-clusters", "ecs-inventory-clusters", "ecs-inventory-task-definition-families", "ecs-inventory-task-definitions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "efs-inventory-file-systems" do
-  service :EFS
+  service :efs
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3418,13 +3418,13 @@ end
   
 coreo_aws_rule_runner "efs-inventory-runner" do
   action :run
-  service :EFS
+  service :efs
   rules ["efs-inventory-file-systems"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "emr-inventory-clusters" do
-  service :EMR
+  service :emr
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3441,7 +3441,7 @@ coreo_aws_rule "emr-inventory-clusters" do
   
 end
 coreo_aws_rule "emr-inventory-security-configurations" do
-  service :EMR
+  service :emr
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -3460,7 +3460,7 @@ end
   
 coreo_aws_rule_runner "emr-inventory-runner" do
   action :run
-  service :EMR
+  service :emr
   rules ["emr-inventory-clusters", "emr-inventory-security-configurations"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
@@ -4099,7 +4099,7 @@ coreo_aws_rule_runner "glacier-inventory-runner" do
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "iam-inventory-account-authorization-details" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4116,7 +4116,7 @@ coreo_aws_rule "iam-inventory-account-authorization-details" do
   
 end
 coreo_aws_rule "iam-inventory-access-keys" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4133,7 +4133,7 @@ coreo_aws_rule "iam-inventory-access-keys" do
   
 end
 coreo_aws_rule "iam-inventory-account-aliases" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4150,7 +4150,7 @@ coreo_aws_rule "iam-inventory-account-aliases" do
   
 end
 coreo_aws_rule "iam-inventory-groups" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4167,7 +4167,7 @@ coreo_aws_rule "iam-inventory-groups" do
   
 end
 coreo_aws_rule "iam-inventory-instance-profiles" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4184,7 +4184,7 @@ coreo_aws_rule "iam-inventory-instance-profiles" do
   
 end
 coreo_aws_rule "iam-inventory-policies" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4201,7 +4201,7 @@ coreo_aws_rule "iam-inventory-policies" do
   
 end
 coreo_aws_rule "iam-inventory-mfa-devices" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4218,7 +4218,7 @@ coreo_aws_rule "iam-inventory-mfa-devices" do
   
 end
 coreo_aws_rule "iam-inventory-open-id-connect-providers" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4235,7 +4235,7 @@ coreo_aws_rule "iam-inventory-open-id-connect-providers" do
   
 end
 coreo_aws_rule "iam-inventory-saml-providers" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4252,7 +4252,7 @@ coreo_aws_rule "iam-inventory-saml-providers" do
   
 end
 coreo_aws_rule "iam-inventory-ssh-public-keys" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4269,7 +4269,7 @@ coreo_aws_rule "iam-inventory-ssh-public-keys" do
   
 end
 coreo_aws_rule "iam-inventory-roles" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4286,7 +4286,7 @@ coreo_aws_rule "iam-inventory-roles" do
   
 end
 coreo_aws_rule "iam-inventory-signing-certificates" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4303,7 +4303,7 @@ coreo_aws_rule "iam-inventory-signing-certificates" do
   
 end
 coreo_aws_rule "iam-inventory-server-certificates" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4320,7 +4320,7 @@ coreo_aws_rule "iam-inventory-server-certificates" do
   
 end
 coreo_aws_rule "iam-inventory-service-specific-credentials" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4337,7 +4337,7 @@ coreo_aws_rule "iam-inventory-service-specific-credentials" do
   
 end
 coreo_aws_rule "iam-inventory-virtual-mfa-devices" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4354,7 +4354,7 @@ coreo_aws_rule "iam-inventory-virtual-mfa-devices" do
   
 end
 coreo_aws_rule "iam-inventory-users" do
-  service :IAM
+  service :iam
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4373,7 +4373,7 @@ end
   
 coreo_aws_rule_runner "iam-inventory-runner" do
   action :run
-  service :IAM
+  service :iam
   rules ["iam-inventory-account-authorization-details", "iam-inventory-access-keys", "iam-inventory-account-aliases", "iam-inventory-groups", "iam-inventory-instance-profiles", "iam-inventory-policies", "iam-inventory-mfa-devices", "iam-inventory-open-id-connect-providers", "iam-inventory-saml-providers", "iam-inventory-ssh-public-keys", "iam-inventory-roles", "iam-inventory-signing-certificates", "iam-inventory-server-certificates", "iam-inventory-service-specific-credentials", "iam-inventory-virtual-mfa-devices", "iam-inventory-users"]
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
@@ -4640,7 +4640,7 @@ coreo_aws_rule_runner "iot-inventory-runner" do
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "kms-inventory-aliases" do
-  service :KMS
+  service :kms
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4657,7 +4657,7 @@ coreo_aws_rule "kms-inventory-aliases" do
   
 end
 coreo_aws_rule "kms-inventory-keys" do
-  service :KMS
+  service :kms
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -4676,7 +4676,7 @@ end
   
 coreo_aws_rule_runner "kms-inventory-runner" do
   action :run
-  service :KMS
+  service :kms
   rules ["kms-inventory-aliases", "kms-inventory-keys"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
@@ -5323,7 +5323,7 @@ coreo_aws_rule_runner "polly-inventory-runner" do
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "rds-inventory-events" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5340,7 +5340,7 @@ coreo_aws_rule "rds-inventory-events" do
   
 end
 coreo_aws_rule "rds-inventory-certificates" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5357,7 +5357,7 @@ coreo_aws_rule "rds-inventory-certificates" do
   
 end
 coreo_aws_rule "rds-inventory-account-attributes" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5374,7 +5374,7 @@ coreo_aws_rule "rds-inventory-account-attributes" do
   
 end
 coreo_aws_rule "rds-inventory-db-cluster-parameter-groups" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5391,7 +5391,7 @@ coreo_aws_rule "rds-inventory-db-cluster-parameter-groups" do
   
 end
 coreo_aws_rule "rds-inventory-db-cluster-snapshots" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5408,7 +5408,7 @@ coreo_aws_rule "rds-inventory-db-cluster-snapshots" do
   
 end
 coreo_aws_rule "rds-inventory-db-engine-versions" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5425,7 +5425,7 @@ coreo_aws_rule "rds-inventory-db-engine-versions" do
   
 end
 coreo_aws_rule "rds-inventory-db-clusters" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5442,7 +5442,7 @@ coreo_aws_rule "rds-inventory-db-clusters" do
   
 end
 coreo_aws_rule "rds-inventory-db-instances" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5459,7 +5459,7 @@ coreo_aws_rule "rds-inventory-db-instances" do
   
 end
 coreo_aws_rule "rds-inventory-db-parameter-groups" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5476,7 +5476,7 @@ coreo_aws_rule "rds-inventory-db-parameter-groups" do
   
 end
 coreo_aws_rule "rds-inventory-db-security-groups" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5493,7 +5493,7 @@ coreo_aws_rule "rds-inventory-db-security-groups" do
   
 end
 coreo_aws_rule "rds-inventory-db-snapshots" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5510,7 +5510,7 @@ coreo_aws_rule "rds-inventory-db-snapshots" do
   
 end
 coreo_aws_rule "rds-inventory-db-subnet-groups" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5527,7 +5527,7 @@ coreo_aws_rule "rds-inventory-db-subnet-groups" do
   
 end
 coreo_aws_rule "rds-inventory-event-categories" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5544,7 +5544,7 @@ coreo_aws_rule "rds-inventory-event-categories" do
   
 end
 coreo_aws_rule "rds-inventory-event-subscriptions" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5561,7 +5561,7 @@ coreo_aws_rule "rds-inventory-event-subscriptions" do
   
 end
 coreo_aws_rule "rds-inventory-option-groups" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5578,7 +5578,7 @@ coreo_aws_rule "rds-inventory-option-groups" do
   
 end
 coreo_aws_rule "rds-inventory-pending-maintenance-actions" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5595,7 +5595,7 @@ coreo_aws_rule "rds-inventory-pending-maintenance-actions" do
   
 end
 coreo_aws_rule "rds-inventory-reserved-db-instances" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5612,7 +5612,7 @@ coreo_aws_rule "rds-inventory-reserved-db-instances" do
   
 end
 coreo_aws_rule "rds-inventory-source-regions" do
-  service :RDS
+  service :rds
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -5631,7 +5631,7 @@ end
   
 coreo_aws_rule_runner "rds-inventory-runner" do
   action :run
-  service :RDS
+  service :rds
   rules ["rds-inventory-events", "rds-inventory-certificates", "rds-inventory-account-attributes", "rds-inventory-db-cluster-parameter-groups", "rds-inventory-db-cluster-snapshots", "rds-inventory-db-engine-versions", "rds-inventory-db-clusters", "rds-inventory-db-instances", "rds-inventory-db-parameter-groups", "rds-inventory-db-security-groups", "rds-inventory-db-snapshots", "rds-inventory-db-subnet-groups", "rds-inventory-event-categories", "rds-inventory-event-subscriptions", "rds-inventory-option-groups", "rds-inventory-pending-maintenance-actions", "rds-inventory-reserved-db-instances", "rds-inventory-source-regions"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
@@ -6017,7 +6017,7 @@ coreo_aws_rule_runner "route53domains-inventory-runner" do
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "s3-inventory-buckets" do
-  service :S3
+  service :s3
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6036,13 +6036,13 @@ end
   
 coreo_aws_rule_runner "s3-inventory-runner" do
   action :run
-  service :S3
+  service :s3
   rules ["s3-inventory-buckets"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "ses-inventory-identities" do
-  service :SES
+  service :ses
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6059,7 +6059,7 @@ coreo_aws_rule "ses-inventory-identities" do
   
 end
 coreo_aws_rule "ses-inventory-send-statistics" do
-  service :SES
+  service :ses
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6076,7 +6076,7 @@ coreo_aws_rule "ses-inventory-send-statistics" do
   
 end
 coreo_aws_rule "ses-inventory-configuration-sets" do
-  service :SES
+  service :ses
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6093,7 +6093,7 @@ coreo_aws_rule "ses-inventory-configuration-sets" do
   
 end
 coreo_aws_rule "ses-inventory-receipt-filters" do
-  service :SES
+  service :ses
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6110,7 +6110,7 @@ coreo_aws_rule "ses-inventory-receipt-filters" do
   
 end
 coreo_aws_rule "ses-inventory-receipt-rule-sets" do
-  service :SES
+  service :ses
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6127,7 +6127,7 @@ coreo_aws_rule "ses-inventory-receipt-rule-sets" do
   
 end
 coreo_aws_rule "ses-inventory-verified-email-addresses" do
-  service :SES
+  service :ses
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6146,13 +6146,13 @@ end
   
 coreo_aws_rule_runner "ses-inventory-runner" do
   action :run
-  service :SES
+  service :ses
   rules ["ses-inventory-identities", "ses-inventory-send-statistics", "ses-inventory-configuration-sets", "ses-inventory-receipt-filters", "ses-inventory-receipt-rule-sets", "ses-inventory-verified-email-addresses"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "sms-inventory-connectors" do
-  service :SMS
+  service :sms
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6169,7 +6169,7 @@ coreo_aws_rule "sms-inventory-connectors" do
   
 end
 coreo_aws_rule "sms-inventory-replication-jobs" do
-  service :SMS
+  service :sms
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6186,7 +6186,7 @@ coreo_aws_rule "sms-inventory-replication-jobs" do
   
 end
 coreo_aws_rule "sms-inventory-servers" do
-  service :SMS
+  service :sms
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6205,13 +6205,13 @@ end
   
 coreo_aws_rule_runner "sms-inventory-runner" do
   action :run
-  service :SMS
+  service :sms
   rules ["sms-inventory-connectors", "sms-inventory-replication-jobs", "sms-inventory-servers"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "sns-inventory-platform-applications" do
-  service :SNS
+  service :sns
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6228,7 +6228,7 @@ coreo_aws_rule "sns-inventory-platform-applications" do
   
 end
 coreo_aws_rule "sns-inventory-subscriptions" do
-  service :SNS
+  service :sns
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6245,7 +6245,7 @@ coreo_aws_rule "sns-inventory-subscriptions" do
   
 end
 coreo_aws_rule "sns-inventory-topics" do
-  service :SNS
+  service :sns
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6264,13 +6264,13 @@ end
   
 coreo_aws_rule_runner "sns-inventory-runner" do
   action :run
-  service :SNS
+  service :sns
   rules ["sns-inventory-platform-applications", "sns-inventory-subscriptions", "sns-inventory-topics"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "sqs-inventory-queues" do
-  service :SQS
+  service :sqs
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6289,13 +6289,13 @@ end
   
 coreo_aws_rule_runner "sqs-inventory-runner" do
   action :run
-  service :SQS
+  service :sqs
   rules ["sqs-inventory-queues"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "ssm-inventory-activations" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6312,7 +6312,7 @@ coreo_aws_rule "ssm-inventory-activations" do
   
 end
 coreo_aws_rule "ssm-inventory-automation-executions" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6329,7 +6329,7 @@ coreo_aws_rule "ssm-inventory-automation-executions" do
   
 end
 coreo_aws_rule "ssm-inventory-maintenance-windows" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6346,7 +6346,7 @@ coreo_aws_rule "ssm-inventory-maintenance-windows" do
   
 end
 coreo_aws_rule "ssm-inventory-parameters" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6363,7 +6363,7 @@ coreo_aws_rule "ssm-inventory-parameters" do
   
 end
 coreo_aws_rule "ssm-inventory-patch-groups" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6380,7 +6380,7 @@ coreo_aws_rule "ssm-inventory-patch-groups" do
   
 end
 coreo_aws_rule "ssm-inventory-associations" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6397,7 +6397,7 @@ coreo_aws_rule "ssm-inventory-associations" do
   
 end
 coreo_aws_rule "ssm-inventory-command-invocations" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6414,7 +6414,7 @@ coreo_aws_rule "ssm-inventory-command-invocations" do
   
 end
 coreo_aws_rule "ssm-inventory-commands" do
-  service :SSM
+  service :ssm
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6433,7 +6433,7 @@ end
   
 coreo_aws_rule_runner "ssm-inventory-runner" do
   action :run
-  service :SSM
+  service :ssm
   rules ["ssm-inventory-activations", "ssm-inventory-automation-executions", "ssm-inventory-maintenance-windows", "ssm-inventory-parameters", "ssm-inventory-patch-groups", "ssm-inventory-associations", "ssm-inventory-command-invocations", "ssm-inventory-commands"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
@@ -6725,7 +6725,7 @@ coreo_aws_rule_runner "storagegateway-inventory-runner" do
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
 end
 coreo_aws_rule "waf-inventory-rules" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6742,7 +6742,7 @@ coreo_aws_rule "waf-inventory-rules" do
   
 end
 coreo_aws_rule "waf-inventory-byte-match-sets" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6759,7 +6759,7 @@ coreo_aws_rule "waf-inventory-byte-match-sets" do
   
 end
 coreo_aws_rule "waf-inventory-ip-sets" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6776,7 +6776,7 @@ coreo_aws_rule "waf-inventory-ip-sets" do
   
 end
 coreo_aws_rule "waf-inventory-size-constraint-sets" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6793,7 +6793,7 @@ coreo_aws_rule "waf-inventory-size-constraint-sets" do
   
 end
 coreo_aws_rule "waf-inventory-sql-injection-match-sets" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6810,7 +6810,7 @@ coreo_aws_rule "waf-inventory-sql-injection-match-sets" do
   
 end
 coreo_aws_rule "waf-inventory-web-acls" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6827,7 +6827,7 @@ coreo_aws_rule "waf-inventory-web-acls" do
   
 end
 coreo_aws_rule "waf-inventory-xss-match-sets" do
-  service :WAF
+  service :waf
   action :define
   link "http://kb.cloudcoreo.com/mydoc_all-inventory.html"
   include_violations_in_count false
@@ -6846,7 +6846,7 @@ end
   
 coreo_aws_rule_runner "waf-inventory-runner" do
   action :run
-  service :WAF
+  service :waf
   rules ["waf-inventory-rules", "waf-inventory-byte-match-sets", "waf-inventory-ip-sets", "waf-inventory-size-constraint-sets", "waf-inventory-sql-injection-match-sets", "waf-inventory-web-acls", "waf-inventory-xss-match-sets"]
   regions ${AUDIT_AWS_INVENTORY_REGIONS}
   filter(${FILTERED_OBJECTS}) if ${FILTERED_OBJECTS}
