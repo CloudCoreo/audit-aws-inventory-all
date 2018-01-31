@@ -27,22 +27,8 @@ variables:
     description: List of AWS regions to check. Default is all regions. Choices are
       ap-northeast-1,ap-northeast-2,ap-south-1,ap-southeast-1,ap-southeast-2,ca-central-1,eu-central-1,eu-west-1,eu-west-2,sa-east-1,us-east-1,us-east-2,us-west-1,us-west-2
     required: true
-    type: array
-    default:
-    - ap-northeast-1
-    - ap-northeast-2
-    - ap-south-1
-    - ap-southeast-1
-    - ap-southeast-2
-    - ca-central-1
-    - eu-central-1
-    - eu-west-1
-    - eu-west-2
-    - sa-east-1
-    - us-east-1
-    - us-east-2
-    - us-west-1
-    - us-west-2
+    type: string
+    default: PLAN::all_regions
   FILTERED_OBJECTS:
     description: "JSON object of string or regex of aws objects to include or exclude and tag in audit"
     required: false
